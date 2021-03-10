@@ -40,6 +40,8 @@ public class FrompmTest {
                 fail("no origin");
             }
             assertNotNull(row.get("date"));
+            assertNotNull(row.get("destination"));
+            assertNotNull(row.get("phone"));
         }
     }
 
