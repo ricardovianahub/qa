@@ -51,6 +51,27 @@ public class FrompmTest {
     @Test
     void createAPNR() throws Exception {
         // setup & execution = Postman
+        CreatePNRResponse response = callCreatePNR();
+        // assertion
+        assertNotNull(response);
+        assertNotNull(response.getRecordLocator());
+        assertNotEquals("", response.getRecordLocator(), "RecordLocator is " + response.getRecordLocator());
+        assertTrue(response.getRecordLocator().length() == 6,"current value "+response.getRecordLocator());
+        String recordLocatorPatternString = "[A-Z]{6}";
+        Pattern patternRecordLocator = Pattern.compile(recordLocatorPatternString);
+        assertTrue(patternRecordLocator.matcher(response.getRecordLocator()).matches());
+    }
+
+    @Test
+    void ensureRecordLocatorsAreDifferentBetweenCalls() {
+        CreatePNRResponse response1 = callCreatePNR();
+        CreatePNRResponse response2 = callCreatePNR();
+        CreatePNRResponse response3 = callCreatePNR();
+        assertNotEquals(response1.getRecordLocator(), response2.getRecordLocator());
+        assertNotEquals(response2.getRecordLocator(), response3.getRecordLocator());
+    }
+
+    private CreatePNRResponse callCreatePNR() {
         CreatePNRResponse response = testRestTemplate.postForObject(
                 "http://ricbox.com/createpnr",
                 new CreatePNRRequest()
@@ -61,15 +82,9 @@ public class FrompmTest {
                         .setPhone("469-555-1234"),
                 CreatePNRResponse.class
         );
-        // assertion
-        assertNotNull(response);
-        assertNotNull(response.getRecordLocator());
-        assertNotEquals("", response.getRecordLocator(), "RecordLocator is " + response.getRecordLocator());
-        assertTrue(response.getRecordLocator().length() == 6);
-        String recordLocatorPatternString = "[A-Z]{6}";
-        Pattern patternRecordLocator = Pattern.compile(recordLocatorPatternString);
-        assertTrue(patternRecordLocator.matcher(response.getRecordLocator()).matches());
+        return response;
     }
+
 
 //    pm.test("Verify there is a itinerary in PNR", function(){
 //            var jsonData = pm.response.json();
