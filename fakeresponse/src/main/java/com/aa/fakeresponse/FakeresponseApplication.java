@@ -1,12 +1,14 @@
 package com.aa.fakeresponse;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
@@ -19,7 +21,35 @@ public class FakeresponseApplication {
 
     @GetMapping(value = "/")
     public String root() {
-        return "root";
+        return "root 002";
+    }
+
+    private static class CreatePNRResponse {
+        private String recordLocator = "BLAH";
+
+        public String getRecordLocator() {
+            return recordLocator;
+        }
+
+        public CreatePNRResponse setRecordLocator(String recordLocator) {
+            this.recordLocator = recordLocator;
+            return this;
+        }
+    }
+
+    @GetMapping(value = "/monitor")
+    public String monitor() {
+        return "Monitor responding from the backend at " + new Date();
+    }
+
+    @GetMapping(value = "/version")
+    public String monitor2() {
+        return "Version 2 - responding from the backend at " + new Date();
+    }
+
+    @PostMapping(value = "/createpnr", produces = MediaType.APPLICATION_JSON_VALUE)
+    public CreatePNRResponse createPNRResponse() {
+        return new CreatePNRResponse();
     }
 
     @GetMapping(value = "/three", produces = MediaType.APPLICATION_JSON_VALUE)
