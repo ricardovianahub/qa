@@ -6,8 +6,10 @@ plugins {
     id 'com.palantir.docker-run' version '0.25.0'
 }
 
-String imageName = "ricardoviana/images:fakeresponse"
+String imageName = "ricardoviana/qaworkshop:fakeresponse"
 String jarFile = "fakeresponse-0.0.1-SNAPSHOT.jar"
+
+// docker build --tag ricardoviana/qaworkshop:fakeresponse --build-arg JAR_FILE=build/libs/fakeresponse-0.0.1-SNAPSHOT.jar .
 
 docker {
     name imageName
