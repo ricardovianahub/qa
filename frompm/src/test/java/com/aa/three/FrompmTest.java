@@ -30,7 +30,7 @@ public class FrompmTest {
     private ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
-    void eachRowShouldContainAFieldSalutationThatContainsOneOfTheFollowingMrMrsMissNA() throws Exception {
+    void ensureServiceThreeHasAllRequiredFields() throws Exception {
         // setup & execution = Postman
         String response = testRestTemplate.getForObject("http://ricbox.com/three", String.class); // playing "Postman" - same functionality as Postman hitting "Send"
         // assertion
@@ -56,10 +56,13 @@ public class FrompmTest {
         assertNotNull(response);
         assertNotNull(response.getRecordLocator());
         assertNotEquals("", response.getRecordLocator(), "RecordLocator is " + response.getRecordLocator());
-        assertTrue(response.getRecordLocator().length() == 6,"current value "+response.getRecordLocator());
+        assertTrue(response.getRecordLocator().length() == 6, "current value " + response.getRecordLocator());
         String recordLocatorPatternString = "[A-Z]{6}";
         Pattern patternRecordLocator = Pattern.compile(recordLocatorPatternString);
-        assertTrue(patternRecordLocator.matcher(response.getRecordLocator()).matches());
+        assertTrue(patternRecordLocator.matcher(response.getRecordLocator()).matches(),
+                "record locator not matching the pattern six letters upper case "
+                        + response.getRecordLocator()
+        );
     }
 
     @Test
