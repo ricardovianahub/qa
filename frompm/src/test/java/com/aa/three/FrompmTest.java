@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 import com.aa.improvekataben.api.createpnr.CreatePNRRequest;
 import com.aa.improvekataben.api.createpnr.CreatePNRResponse;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,6 +16,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.aa.improvekataben.FromPMApplication;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -44,9 +46,24 @@ public class FrompmTest {
             assertNotNull(row.get("date"));
             assertNotNull(row.get("destination"));
             assertNotNull(row.get("phone"));
+            assertNotNull(row.get("name"));
         }
     }
 
+    @Test
+        // Design
+    void ensureNameHasOnlyLettersSpacesOrHyphens() throws JsonProcessingException {
+        // setup & execution = Postman
+        String response = testRestTemplate.getForObject("http://ricbox.com/three", String.class); // playing "Postman" - same functionality as Postman hitting "Send"
+        // assertion
+        List<Map> jsonData = objectMapper.readValue(response, List.class);
+        String recordLocatorPatternString = "([A-Za-z\\-]+\\s[A-Za-z\\-]+";
+        Pattern patternRecordLocator = Pattern.compile(recordLocatorPatternString);
+        for (Map row : jsonData) {
+            assertTrue(patternRecordLocator.matcher(row.get("name").toString()).matches(),
+                    "Name does not match pattern " + recordLocatorPatternString + " = " + row.get("name"));
+        }
+    }
 
     @Test
     void createAPNR() throws Exception {
