@@ -3,6 +3,7 @@ package com.aa.fakeresponse;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,6 +28,10 @@ public class FakeresponseApplication {
     private static class CreatePNRResponse {
         private String recordLocator = "BLAH";
 
+        public CreatePNRResponse(String recordLocator) {
+            this.recordLocator = recordLocator;
+        }
+
         public String getRecordLocator() {
             return recordLocator;
         }
@@ -49,23 +54,28 @@ public class FakeresponseApplication {
 
     @PostMapping(value = "/createpnr", produces = MediaType.APPLICATION_JSON_VALUE)
     public CreatePNRResponse createPNRResponse() {
-        return new CreatePNRResponse();
+        StringBuilder stringBuilder = new StringBuilder();
+        Random rnd = new Random();
+        for (int i = 0; i < 6; i++) {
+            stringBuilder.append((char) ('A' + rnd.nextInt(26)));
+        }
+        return new CreatePNRResponse(stringBuilder.toString());
     }
 
     @GetMapping(value = "/three", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Data3> three() {
         List<Data3> data3List = new ArrayList<>();
-        data3List.add(new Data3("ORDDFW", "Tomatoes", "Mrs", "Carrots", "555-1234"));
-        data3List.add(new Data3("ORDDFW", "Tomatoes", "Mrs", "Carrots", "555-1234"));
-        data3List.add(new Data3("ORDDFW", "Tomatoes", "Mrs", "Carrots", "555-1234"));
-        data3List.add(new Data3("ORDDFW", "Tomatoes", "Mrs", "Carrots", "555-1234"));
-        data3List.add(new Data3("ORDDFW", "Tomatoes", "Mrs", "Carrots", "555-1234"));
-        data3List.add(new Data3("DFWLAX", "Carrots", "Mr", "", "555-1234"));
-        data3List.add(new Data3("LAXYYZ", "Ice Cream", "Miss", "", "555-1234"));
-        data3List.add(new Data3("LAXYYZ", "Ice Cream", "Miss", "    ", "555-1234"));
-        data3List.add(new Data3("LAXYYZ", "Ice Cream", "Miss", " ", "555-1234"));
-        data3List.add(new Data3("LAXYYZ", "Ice Cream", "Miss", "   ", "555-1234"));
-        data3List.add(new Data3("LAXYYZ", "Ice Cream", "Miss", "LAX", "555-1234"));
+        data3List.add(new Data3("ORDDFW", "Tomatoes", "Mrs", "Carrots", "555-1234", "ssr", "John Doe"));
+        data3List.add(new Data3("ORDDFW", "Tomatoes", "Mrs", "Carrots", "555-1234", "ssr", "John Doe"));
+        data3List.add(new Data3("ORDDFW", "Tomatoes", "Mrs", "Carrots", "555-1234", "ssr", "John Doe"));
+        data3List.add(new Data3("ORDDFW", "Tomatoes", "Mrs", "Carrots", "555-1234", "ssr", "John Doe"));
+        data3List.add(new Data3("ORDDFW", "Tomatoes", "Mrs", "Carrots", "555-1234", "ssr", "John Doe"));
+        data3List.add(new Data3("DFWLAX", "Carrots", "Mr", "", "555-1234", "ssr", "John Doe"));
+        data3List.add(new Data3("LAXYYZ", "Ice Cream", "Miss", "", "555-1234", "ssr", "John Doe"));
+        data3List.add(new Data3("LAXYYZ", "Ice Cream", "Miss", "    ", "555-1234", "ssr", "John Doe"));
+        data3List.add(new Data3("LAXYYZ", "Ice Cream", "Miss", " ", "555-1234", "ssr", "John Doe"));
+        data3List.add(new Data3("LAXYYZ", "Ice Cream", "Miss", "   ", "555-1234", "ssr", "John Doe"));
+        data3List.add(new Data3("LAXYYZ", "Ice Cream", "Miss", "LAX", "555-1234", "ssr", "John Doe"));
 
         return data3List;
     }
@@ -161,13 +171,17 @@ public class FakeresponseApplication {
         private String date;
         private String destination;
         private String phone;
+        private String ssr;
+        private String name;
 
-        public Data3(String itinerary, String origin, String date, String destination, String phone) {
+        public Data3(String itinerary, String origin, String date, String destination, String phone, String ssr, String name) {
             this.itinerary = itinerary;
             this.origin = origin;
             this.date = date;
             this.destination = destination;
             this.phone = phone;
+            this.ssr = ssr;
+            this.name = name;
         }
 
         public String getItinerary() {
@@ -212,6 +226,24 @@ public class FakeresponseApplication {
 
         public Data3 setPhone(String phone) {
             this.phone = phone;
+            return this;
+        }
+
+        public String getSsr() {
+            return ssr;
+        }
+
+        public Data3 setSsr(String ssr) {
+            this.ssr = ssr;
+            return this;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public Data3 setName(String name) {
+            this.name = name;
             return this;
         }
     }
