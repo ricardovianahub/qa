@@ -40,6 +40,11 @@ public class FrompmTest {
         for (Map row : jsonData) {
             // pm.expect(row.itinerary).to.not.equal(null);
             assertNotNull(row.get("itinerary"));
+            if (row.get("ssr") == null) {
+                fail("no ssr");
+            }
+
+
             if (row.get("origin") == null) {
                 fail("no origin");
             }
@@ -73,7 +78,7 @@ public class FrompmTest {
         assertNotNull(response);
         assertNotNull(response.getRecordLocator());
         assertNotEquals("", response.getRecordLocator(), "RecordLocator is " + response.getRecordLocator());
-        assertTrue(response.getRecordLocator().length() == 6, "current value " + response.getRecordLocator());
+        assertEquals(response.getRecordLocator().length(), 6, "current value " + response.getRecordLocator());
         String recordLocatorPatternString = "[A-Z]{6}";
         Pattern patternRecordLocator = Pattern.compile(recordLocatorPatternString);
         assertTrue(patternRecordLocator.matcher(response.getRecordLocator()).matches(),
