@@ -40,23 +40,30 @@ public class FrompmTest {
         for (Map row : jsonData) {
             // pm.expect(row.itinerary).to.not.equal(null);
             assertNotNull(row.get("itinerary"));
-            if (row.get("ssr") == null) {
-                fail("no ssr");
-            }
-
-
-            if (row.get("origin") == null) {
-                fail("no origin");
-            }
+            assertNotNull(row.get("origin"));
             assertNotNull(row.get("date"));
             assertNotNull(row.get("destination"));
             assertNotNull(row.get("phone"));
             assertNotNull(row.get("name"));
+            assertNotNull(row.get("ssr"));
         }
     }
 
     @Test
-        // Design
+    void ensureSSROnlyContainsLettersAndNumbers() throws JsonProcessingException {
+        // setup & execution = Postman
+        String response = testRestTemplate.getForObject("http://ricbox.com/three", String.class); // playing "Postman" - same functionality as Postman hitting "Send"
+        // assertion
+        List<Map> jsonData = objectMapper.readValue(response, List.class);
+        String ssrPatternString = "[A-Za-z0-9]{1}[A-Za-z0-9\\s]{1,8}[A-Za-z0-9]{1}";
+        Pattern patternRecordLocator = Pattern.compile(ssrPatternString);
+        for (Map row : jsonData) {
+            assertTrue(patternRecordLocator.matcher(row.get("ssr").toString()).matches(),
+                    "SSR does not match pattern " + ssrPatternString + " = [" + row.get("ssr") + "]");
+        }
+    }
+
+    @Test
     void ensureNameHasOnlyLettersSpacesOrHyphens() throws JsonProcessingException {
         // setup & execution = Postman
         String response = testRestTemplate.getForObject("http://ricbox.com/three", String.class); // playing "Postman" - same functionality as Postman hitting "Send"
