@@ -55,7 +55,10 @@ public class FrompmTest {
         String response = testRestTemplate.getForObject("http://ricbox.com/three", String.class); // playing "Postman" - same functionality as Postman hitting "Send"
         // assertion
         List<Map> jsonData = objectMapper.readValue(response, List.class);
-        String ssrPatternString = "[A-Za-z0-9]{1}[A-Za-z0-9\\s]{1,8}[A-Za-z0-9]{1}";
+        String ssrPatternString =
+                "[A-Za-z0-9]{1}" + // 1st character
+                "[A-Za-z0-9\\s]{1,8}" + // Middle characters
+                "[A-Za-z0-9]{1}"; // Last character
         Pattern patternRecordLocator = Pattern.compile(ssrPatternString);
         for (Map row : jsonData) {
             assertTrue(patternRecordLocator.matcher(row.get("ssr").toString()).matches(),
