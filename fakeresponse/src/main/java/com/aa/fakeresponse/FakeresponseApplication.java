@@ -65,17 +65,17 @@ public class FakeresponseApplication {
     @GetMapping(value = "/three", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Data3> three() {
         List<Data3> data3List = new ArrayList<>();
-        data3List.add(new Data3("ORDDFW", "Tomatoes", "Mrs", "Carrots", "555-1234", "sdfgs ert3", "John Doe"));
-        data3List.add(new Data3("ORDDFW", "Tomatoes", "Mrs", "Carrots", "555-1234", "sdsdf", "John Doe"));
-        data3List.add(new Data3("ORDDFW", "Tomatoes", "Mrs", "Carrots", "555-1234", "fjgjfgj", "John Doe"));
-        data3List.add(new Data3("ORDDFW", "Tomatoes", "Mrs", "Carrots", "555-1234", "rturt", "John Doe"));
-        data3List.add(new Data3("ORDDFW", "Tomatoes", "Mrs", "Carrots", "555-1234", "srr tusr", "John Doe"));
-        data3List.add(new Data3("DFWLAX", "Carrots", "Mr", "", "555-1234", "rtyrtty", "John Doe"));
-        data3List.add(new Data3("LAXYYZ", "Ice Cream", "Miss", "", "555-1234", "ggggg", "John Doe"));
-        data3List.add(new Data3("LAXYYZ", "Ice Cream", "Miss", "    ", "555-1234", "dfgdfg", "John Doe"));
-        data3List.add(new Data3("LAXYYZ", "Ice Cream", "Miss", " ", "555-1234", "dfgdfgd fg", "John Doe"));
-        data3List.add(new Data3("LAXYYZ", "Ice Cream", "Miss", "   ", "555-1234", "d fgdgdfg", "John Doe"));
-        data3List.add(new Data3("LAXYYZ", "Ice Cream", "Miss", "LAX", "555-1234", "sgggsr", "John Doe"));
+        data3List.add(new Data3("ORDDFW", "Tomatoes", "Mrs", "Carrots", "555-1234", "sdfgs ert3John Doe", "John Doe"));
+        data3List.add(new Data3("ORDDFW", "Tomatoes", "Mrs", "Carrots", "555-1234", "sdsdfJohn Doe", "John Doe"));
+        data3List.add(new Data3("ORDDFW", "Tomatoes", "Mrs", "Carrots", "555-1234", "John Doe", "John Doe"));
+        data3List.add(new Data3("ORDDFW", "Tomatoes", "Mrs", "Carrots", "555-1234", "rtuJane Doe", "Jane Doe"));
+        data3List.add(new Data3("ORDDFW", "Tomatoes", "Mrs", "Carrots", "555-1234", "srr tusrJohn Doe", "John Doe"));
+        data3List.add(new Data3("DFWLAX", "Carrots", "Mr", "", "555-1234", "rtyrttyJohn Doe", "John Doe"));
+        data3List.add(new Data3("LAXYYZ", "Ice Cream", "Miss", "", "555-1234", "gggggJohn Doe", "John Doe"));
+        data3List.add(new Data3("LAXYYZ", "Ice Cream", "Miss", "    ", "555-1234", "dfgdfgJohn Doe", "John Doe"));
+        data3List.add(new Data3("LAXYYZ", "Ice Cream", "Miss", " ", "555-1234", "John Doe", "John Doe"));
+        data3List.add(new Data3("LAXYYZ", "Ice Cream", "Miss", "   ", "555-1234", "d fgdgdfgJohn Doe", "John Doe"));
+        data3List.add(new Data3("LAXYYZ", "Ice Cream", "Miss", "LAX", "555-1234", "sJohn Doe", "John Doe"));
 
         return data3List;
     }

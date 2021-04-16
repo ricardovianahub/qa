@@ -57,12 +57,24 @@ public class FrompmTest {
         List<Map> jsonData = objectMapper.readValue(response, List.class);
         String ssrPatternString =
                 "[A-Za-z0-9]{1}" + // 1st character
-                "[A-Za-z0-9\\s]{1,8}" + // Middle characters
+                "[A-Za-z0-9\\s]{1,20}" + // Middle characters
                 "[A-Za-z0-9]{1}"; // Last character
         Pattern patternRecordLocator = Pattern.compile(ssrPatternString);
         for (Map row : jsonData) {
             assertTrue(patternRecordLocator.matcher(row.get("ssr").toString()).matches(),
-                    "SSR does not match pattern " + ssrPatternString + " = [" + row.get("ssr") + "]");
+                    String.format("SSR does not match pattern %s = [%s]",
+                            ssrPatternString,
+                            row.get("ssr")
+                    )
+            );
+            assertTrue(
+                    row.get("ssr").toString()
+                            .endsWith(row.get("name").toString()),
+                    String.format("SSR did not end with name. SSR = [%s] and name = [%s]",
+                            row.get("ssr"),
+                            row.get("name")
+                    )
+            );
         }
     }
 
@@ -72,7 +84,7 @@ public class FrompmTest {
         String response = testRestTemplate.getForObject("http://ricbox.com/three", String.class); // playing "Postman" - same functionality as Postman hitting "Send"
         // assertion
         List<Map> jsonData = objectMapper.readValue(response, List.class);
-        String recordLocatorPatternString = "[A-Za-z\\-]+\\s[A-Za-z\\-]+";
+        String recordLocatorPatternString = "^[A-Za-z\\-]+\\s[A-Za-z\\-]+${3,15}";
         Pattern patternRecordLocator = Pattern.compile(recordLocatorPatternString);
         for (Map row : jsonData) {
             assertTrue(patternRecordLocator.matcher(row.get("name").toString()).matches(),
