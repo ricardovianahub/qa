@@ -50,15 +50,50 @@ public class FrompmTest {
     }
 
     @Test
-    void ensureSSROnlyContainsLettersAndNumbers() throws JsonProcessingException {
+    void ensureDestinationAcceptsJustThreeUpperCaseLetters() throws JsonProcessingException {
+        // setup & execution = Postman
+        String response = testRestTemplate.getForObject("http://ricbox.com/three", String.class); // playing "Postman" - same functionality as Postman hitting "Send"
+        // assertion
+        List<Map> jsonData = objectMapper.readValue(response, List.class);
+        String recordLocatorPatternString = "^[A-Z]{3}$";
+        Pattern patternRecordLocator = Pattern.compile(recordLocatorPatternString);
+        for (Map row : jsonData) {
+            assertTrue(patternRecordLocator.matcher(row.get("destination").toString()).matches(),
+                    "Destination does not match pattern " + recordLocatorPatternString + " = " + row.get("destination"));
+        }
+    }
+
+    @Test
+    void ensureDestinationMatchesLastThreeLettersOfItinerary() throws JsonProcessingException {
+        // setup & execution = Postman
+        String response = testRestTemplate.getForObject("http://ricbox.com/three", String.class); // playing "Postman" - same functionality as Postman hitting "Send"
+        // assertion
+        List<Map> jsonData = objectMapper.readValue(response, List.class);
+
+        for (Map row : jsonData) {
+            // Destination (NYC) does not match the last three letters of the itinerary (ORDDFW)
+            // Change the message into: Google Java substring
+            // Row #1 - There was a problem. NYC is the destination, but the itinerary does not end with it. Instead it ends with DFW
+            assertTrue(row.get("itinerary").toString().endsWith(row.get("destination").toString()),
+                    "Destination ("
+                            + row.get("destination")
+                            + ") does not match the last three letters of the itinerary ("
+                            + row.get("itinerary")
+                            + ")"
+            );
+        }
+    }
+
+    @Test
+    void ensureSSROnlyContainsLettersAndNumbersAndEndsWithName() throws JsonProcessingException {
         // setup & execution = Postman
         String response = testRestTemplate.getForObject("http://ricbox.com/three", String.class); // playing "Postman" - same functionality as Postman hitting "Send"
         // assertion
         List<Map> jsonData = objectMapper.readValue(response, List.class);
         String ssrPatternString =
                 "[A-Za-z0-9]{1}" + // 1st character
-                "[A-Za-z0-9\\s]{1,20}" + // Middle characters
-                "[A-Za-z0-9]{1}"; // Last character
+                        "[A-Za-z0-9\\s]{1,20}" + // Middle characters
+                        "[A-Za-z0-9]{1}"; // Last character
         Pattern patternRecordLocator = Pattern.compile(ssrPatternString);
         for (Map row : jsonData) {
             assertTrue(patternRecordLocator.matcher(row.get("ssr").toString()).matches(),
