@@ -75,11 +75,15 @@ public class FrompmTest {
             // Change the message into: Google Java substring
             // Row #1 - There was a problem. NYC is the destination, but the itinerary does not end with it. Instead it ends with DFW
             assertTrue(row.get("itinerary").toString().endsWith(row.get("destination").toString()),
-                    "Destination ("
+                     "Row #1 - There was a problem. "
+                            + row.get("destination")
+                            + " is the destination, but the itinerary does not end with it. Instead it ends with "
+                            + row.get("itinerary").toString().substring(3)
+                   /* "Destination ("
                             + row.get("destination")
                             + ") does not match the last three letters of the itinerary ("
                             + row.get("itinerary")
-                            + ")"
+                            + ")"*/
             );
         }
     }
