@@ -69,21 +69,23 @@ public class FrompmTest {
         String response = testRestTemplate.getForObject("http://ricbox.com/three", String.class); // playing "Postman" - same functionality as Postman hitting "Send"
         // assertion
         List<Map> jsonData = objectMapper.readValue(response, List.class);
-
+        int counter = 0;
         for (Map row : jsonData) {
+            counter=counter+1;
             // Destination (NYC) does not match the last three letters of the itinerary (ORDDFW)
             // Change the message into: Google Java substring
             // Row #1 - There was a problem. NYC is the destination, but the itinerary does not end with it. Instead it ends with DFW
+            // how do we know what which row I'm on and how to print it. start from 1
             assertTrue(row.get("itinerary").toString().endsWith(row.get("destination").toString()),
-                     "Row #1 - There was a problem. "
-                            + row.get("destination")
-                            + " is the destination, but the itinerary does not end with it. Instead it ends with "
-                            + row.get("itinerary").toString().substring(3)
-                   /* "Destination ("
-                            + row.get("destination")
-                            + ") does not match the last three letters of the itinerary ("
-                            + row.get("itinerary")
-                            + ")"*/
+                    "Row #"+counter+" - there was a problem. "
+                   + row.get("destination")
+                   + " is the destination, but the itinerary does not end with it. Instead it ends with "
+                   + row.get("itinerary").toString().substring(3)
+            /*Destination (*
+            row.get ("destination")
+            *) does not match the last three letters of the Itinerary (*
+            row.get ("Itinerary")
+            ")" */
             );
         }
     }
@@ -184,7 +186,6 @@ public class FrompmTest {
 //            }
 //        });
 
-}
 //pm.test("Each row should contain a field salutation that contains one of the following:  Mr Mrs Miss N/A", function(){
 //        var jsonData = pm.response.json();
 //        var expect = true;
@@ -204,3 +205,26 @@ public class FrompmTest {
 //        }
 //        pm.expect(expect).to.equal(true);
 //        });
+
+//new test requirement
+// Every time that you call the service/passengers there should be no more than 4 PNRs with origination of LAX
+//http://ricbox.com/passengers
+//
+
+    @Test
+    void ensureNoMoreThanFourPnrsOriginateLAX() throws JsonProcessingException {
+        // setup & execution = Postman http://ricbox.com/passengers
+        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class); // playing "Postman" - same functionality as Postman hitting "Send"
+        // assertion
+        List<Map> jsonData = objectMapper.readValue(response, List.class);
+        int counter = 0;
+        for (Map row : jsonData) {
+            if (row.get("origination").equals("LAX")) {
+                counter = counter + 1;
+            }
+            assertTrue(counter <= 4);
+        }
+    }
+}
+
+
