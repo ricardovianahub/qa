@@ -2,6 +2,7 @@ package com.aa.three;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 import com.aa.improvekataben.api.createpnr.CreatePNRRequest;
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.server.DelegatingServerHttpResponse;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.aa.improvekataben.FromPMApplication;
@@ -90,6 +92,45 @@ public class FrompmTest {
         }
     }
 
+    //i want atleast 50% of pax residence and origin to be same
+    //how much percentage have same residence and origin print percentage
+    //http://ricbox.com/passengers"
+    @Test
+    void ensureAtleastFiftypercentPaxResidenceIsSameasOrigin() throws JsonProcessingException {
+        // setup & execution = Postman
+        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class); // playing "Postman" - same functionality as Postman hitting "Send"
+        // assertion
+        List<Map> jsonData = objectMapper.readValue(response, List.class);
+         int match = 0;
+         int nomatch = 0;
+        for (Map row : jsonData) {
+            if ( (Objects.equals(row.get("residence"), row.get("origination")))) {
+                match = match + 1;
+            }
+            else
+            {
+               nomatch = nomatch+1;
+            }
+
+        }
+        assertTrue(((float) match/(match+nomatch)  * 100) >= 50,
+
+                "There are less than 50% pax whose origin and residence does not match. "
+                        + "\n"
+                        + "No.of pax with matching residence and origin are: "
+                        + match
+                        +"\n"
+                        + "Percentage of pax with matching residence and origin are: "
+                        + (float) match/(match+nomatch)  * 100
+                        + "\n"
+                        + "No.of pax without matching residence and origin are: "
+                        + nomatch
+                        + "\n"
+                        + "Percentage of pax without matching residence and origin are: "
+                        + (float) nomatch/(match+nomatch)  * 100
+
+        );
+    }
     @Test
     void ensureSSROnlyContainsLettersAndNumbersAndEndsWithName() throws JsonProcessingException {
         // setup & execution = Postman
