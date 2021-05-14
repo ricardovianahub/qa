@@ -132,6 +132,20 @@ public class FrompmTest {
         );
     }
     @Test
+    void ensureAtleastFiftypercentPaxDepartFromSameZipcode() throws JsonProcessingException {
+        //We want a test that will pass if more than 50% of the passengers take off from the same ZIP code, it not necessarily the same airport
+        // there will be two services ricbox.com/passengers ricbox.com/ricbox.com/airport/JFK
+        //example syntax: http://ricbox.com/airport/JFK
+        //{ "zip" : "75006" }
+        String response = testRestTemplate.getForObject("http://ricbox.com/airport", String.class); // playing "Postman" - same functionality as Postman hitting "Send"
+        // assertion
+        List<Map> jsonData = objectMapper.readValue(response, List.class);
+
+
+
+
+
+    @Test
     void ensureSSROnlyContainsLettersAndNumbersAndEndsWithName() throws JsonProcessingException {
         // setup & execution = Postman
         String response = testRestTemplate.getForObject("http://ricbox.com/three", String.class); // playing "Postman" - same functionality as Postman hitting "Send"
@@ -263,7 +277,7 @@ public class FrompmTest {
             if (row.get("origination").equals("LAX")) {
                 counter = counter + 1;
             }
-            assertTrue(counter <= 4);
+            assertTrue(counter <= 4); 
         }
     }
 }
