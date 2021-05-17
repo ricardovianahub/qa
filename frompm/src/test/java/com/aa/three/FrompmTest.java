@@ -95,6 +95,7 @@ public class FrompmTest {
     //i want atleast 50% of pax residence and origin to be same
     //how much percentage have same residence and origin print percentage
     //http://ricbox.com/passengers"
+    //another test
     @Test
     void ensureAtleastFiftypercentPaxResidenceIsSameasOrigin() throws JsonProcessingException {
         // setup & execution = Postman
