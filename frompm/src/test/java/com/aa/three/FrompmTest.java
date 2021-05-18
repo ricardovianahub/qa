@@ -8,13 +8,13 @@ import java.util.regex.Pattern;
 import com.aa.improvekataben.api.createpnr.CreatePNRRequest;
 import com.aa.improvekataben.api.createpnr.CreatePNRResponse;
 
+import org.aspectj.bridge.IMessage;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.server.DelegatingServerHttpResponse;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.aa.improvekataben.FromPMApplication;
@@ -73,16 +73,16 @@ public class FrompmTest {
         List<Map> jsonData = objectMapper.readValue(response, List.class);
         int counter = 0;
         for (Map row : jsonData) {
-            counter=counter+1;
+            counter = counter + 1;
             // Destination (NYC) does not match the last three letters of the itinerary (ORDDFW)
             // Change the message into: Google Java substring
             // Row #1 - There was a problem. NYC is the destination, but the itinerary does not end with it. Instead it ends with DFW
             // how do we know what which row I'm on and how to print it. start from 1
             assertTrue(row.get("itinerary").toString().endsWith(row.get("destination").toString()),
-                    "Row #"+counter+" - there was a problem. "
-                   + row.get("destination")
-                   + " is the destination, but the itinerary does not end with it. Instead it ends with "
-                   + row.get("itinerary").toString().substring(3)
+                    "Row #" + counter + " - there was a problem. "
+                            + row.get("destination")
+                            + " is the destination, but the itinerary does not end with it. Instead it ends with "
+                            + row.get("itinerary").toString().substring(3)
             /*Destination (*
             row.get ("destination")
             *) does not match the last three letters of the Itinerary (*
@@ -101,49 +101,72 @@ public class FrompmTest {
         String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class); // playing "Postman" - same functionality as Postman hitting "Send"
         // assertion
         List<Map> jsonData = objectMapper.readValue(response, List.class);
-         int match = 0;
-         int nomatch = 0;
+        int match = 0;
+        int nomatch = 0;
         for (Map row : jsonData) {
-            if ( (Objects.equals(row.get("residence"), row.get("origination")))) {
+            if ((Objects.equals(row.get("residence"), row.get("origination")))) {
                 match = match + 1;
-            }
-            else
-            {
-               nomatch = nomatch+1;
+            } else {
+                nomatch = nomatch + 1;
             }
 
         }
-        assertTrue(((float) match/(match+nomatch)  * 100) >= 50,
+        assertTrue(((float) match / (match + nomatch) * 100) >= 50,
 
                 "There are less than 50% pax whose origin and residence does not match. "
                         + "\n"
                         + "No.of pax with matching residence and origin are: "
                         + match
-                        +"\n"
+                        + "\n"
                         + "Percentage of pax with matching residence and origin are: "
-                        + (float) match/(match+nomatch)  * 100
+                        + (float) match / (match + nomatch) * 100
                         + "\n"
                         + "No.of pax without matching residence and origin are: "
                         + nomatch
                         + "\n"
                         + "Percentage of pax without matching residence and origin are: "
-                        + (float) nomatch/(match+nomatch)  * 100
+                        + (float) nomatch / (match + nomatch) * 100
 
         );
     }
+
     @Test
     void ensureAtleastFiftypercentPaxDepartFromSameZipcode() throws JsonProcessingException {
-        //We want a test that will pass if more than 50% of the passengers take off from the same ZIP code, it not necessarily the same airport
+        // test that will pass if more than 50% of the passengers take off from the same ZIP code, it not necessarily the same airport
         // there will be two services ricbox.com/passengers ricbox.com/ricbox.com/airport/JFK
-        //example syntax: http://ricbox.com/airport/JFK
-        //{ "zip" : "75006" }
-        String response = testRestTemplate.getForObject("http://ricbox.com/airport", String.class); // playing "Postman" - same functionality as Postman hitting "Send"
-        // assertion
+        //example syntax: http://ricbox.com/airport/YYZ
+        //{ "zip" : "13302" }
+        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
         List<Map> jsonData = objectMapper.readValue(response, List.class);
+        int match = 0;
+        int total = jsonData.size();
+        for (Map row : jsonData) {
+            String residence = row.get("residence").toString();
+            String origination = row.get("origination").toString();
+            String residenceVal = testRestTemplate.getForObject("http://ricbox.com/airport/" + residence, String.class);
+            String originationVal = testRestTemplate.getForObject("http://ricbox.com/airport/" + origination, String.class);
+            if (Objects.equals(residenceVal, originationVal)) {
+                match = match + 1;
+            }
 
+        }
+        assertTrue(((float) match / total * 100) >= 50,
 
-
-
+                "There are less than 50% pax that Depart From SameZipcode as that of residence: "
+                        + "\n"
+                        + "No.of pax that Depart From SameZipcode as that of residence are: "
+                        + match
+                        + "\n"
+                        + "Percentage of pax that Depart From SameZipcode as that of residence: "
+                        + (float) match / total * 100
+                        + "\n"
+                        + "No.of pax that Depart From Different Zipcode as that of residence are: "
+                        + (total - match)
+                        + "\n"
+                        + "Percentage of pax that Depart From SameZipcode as that of residence: "
+                        + (float) (total - match) / total * 100
+        );
+    }
 
     @Test
     void ensureSSROnlyContainsLettersAndNumbersAndEndsWithName() throws JsonProcessingException {
@@ -277,7 +300,7 @@ public class FrompmTest {
             if (row.get("origination").equals("LAX")) {
                 counter = counter + 1;
             }
-            assertTrue(counter <= 4); 
+            assertTrue(counter <= 4);
         }
     }
 }
