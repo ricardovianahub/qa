@@ -1,5 +1,6 @@
 package com.aa.three;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -129,17 +130,50 @@ public class FrompmTest {
 
         );
     }
-//not finished
-    @Test
-    void ensureAtleastFiftypercentPaxDepartFromSameZipcode() throws JsonProcessingException {
-        //We want a test that will pass if more than 50% of the passengers take off from the same ZIP code, it not necessarily the same airport
-        // there will be two services ricbox.com/passengers ricbox.com/ricbox.com/airport/JFK
-        //example syntax: http://ricbox.com/airport/JFK
-        //{ "zip" : "75006" }
-        String response = testRestTemplate.getForObject("http://ricbox.com/airport", String.class); // playing "Postman" - same functionality as Postman hitting "Send"
-        // assertion
-        List<Map> jsonData = objectMapper.readValue(response, List.class);
+
+@Test
+void ensureAtleastFiftypercentPaxDepartFromSameZipcode() throws JsonProcessingException {
+    //We want a test that will pass if more than 50% of the passengers take off from the same ZIP code, it not necessarily the same airport
+    // there will be two services ricbox.com/passengers ricbox.com/airport/JFK
+    //example syntax: http://ricbox.com/airport/JFK
+    //{ "zip" : "75006" }
+    String passengers = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+    //List<map> jsonData = objectMapper.readValue("firstName,lastName,origination,residence", List.class);
+    System.out.println(objectMapper.readValue(passengers, List.class));
+    List<Map<String, String>> paxlist = objectMapper.readValue(passengers, List.class);
+    Map<String, Integer> numOfPaxPerZipcode = new HashMap <String, Integer>();
+    int totalPaxCount = 0;
+    for (Map<String, String> row : paxlist) {
+        totalPaxCount = totalPaxCount + 1;
+        System.out.println("Object:" + row.get("origination"));
+        String origination = row.get("origination");
+        String url = "http://ricbox.com/airport/" + origination;
+        String zipcodeResponse = testRestTemplate.getForObject(url, String.class);
+        Map<String, String> zipcodeMap = objectMapper.readValue(zipcodeResponse, Map.class);
+        String zipcode = zipcodeMap.get("zip");
+        System.out.println(origination + ":" + zipcode);
+        if (numOfPaxPerZipcode.containsKey(zipcode)) {
+            int countPassenger = numOfPaxPerZipcode.get(zipcode);
+            countPassenger = countPassenger + 1;
+            numOfPaxPerZipcode.put(zipcode, countPassenger);
+        } else {
+            numOfPaxPerZipcode.put(zipcode, 1);
+
+
+        }
     }
+    boolean hasatLeast50PercentPax = false;
+    for (Map.Entry<String, Integer> zipcodes : numOfPaxPerZipcode.entrySet()) {
+        int passengerCount = zipcodes.getValue();
+        if (passengerCount / totalPaxCount > 0.5) {
+            hasatLeast50PercentPax = true;
+            break;
+        }
+    }
+    assertFalse(hasatLeast50PercentPax);
+}
+
+
 
     @Test
     void ensureSSROnlyContainsLettersAndNumbersAndEndsWithName () throws JsonProcessingException {
