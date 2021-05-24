@@ -137,11 +137,16 @@ public class FrompmTest {
         // there will be two services ricbox.com/passengers ricbox.com/ricbox.com/airport/JFK
         //example syntax: http://ricbox.com/airport/JFK
         //{ "zip" : "75006" }
-        String response = testRestTemplate.getForObject("http://ricbox.com/airport", String.class); // playing "Postman" - same functionality as Postman hitting "Send"
+        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class); // playing "Postman" - same functionality as Postman hitting "Send"
+        String response = testRestTemplate.getForObject("http://ricbox.com/airport", String.class);
         // assertion
         List<Map> jsonData = objectMapper.readValue(response, List.class);
+        for (Map row : jsonData) {
 
 
+        }
+    }
+//test
 
 
 
