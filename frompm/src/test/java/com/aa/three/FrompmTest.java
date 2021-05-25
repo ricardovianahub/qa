@@ -131,6 +131,8 @@ public class FrompmTest {
         );
     }
 
+    //test
+
 @Test
 void ensureAtleastFiftypercentPaxDepartFromSameZipcode() throws JsonProcessingException {
     //We want a test that will pass if more than 50% of the passengers take off from the same ZIP code, it not necessarily the same airport
