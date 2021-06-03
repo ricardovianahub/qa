@@ -137,15 +137,13 @@ public class FrompmTest {
         //example syntax: http://ricbox.com/airport/YYZ
         //{ "zip" : "13302" }
         String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
-        List<Map> jsonData = objectMapper.readValue(response, List.class);
+        List<Map> travellers = objectMapper.readValue(response, List.class);
+        int total = travellers.size();
         int match = 0;
-        int total = jsonData.size();
-        for (Map row : jsonData) {
-            String residence = row.get("residence").toString();
-            String origination = row.get("origination").toString();
-            String residenceVal = testRestTemplate.getForObject("http://ricbox.com/airport/" + residence, String.class);
-            String originationVal = testRestTemplate.getForObject("http://ricbox.com/airport/" + origination, String.class);
-            if (Objects.equals(residenceVal, originationVal)) {
+        for (Map map : travellers) {
+            String originationZipcode = testRestTemplate.getForObject("http://ricbox.com/airport/" + map.get("origination"), String.class);
+            String residenceZipcode = testRestTemplate.getForObject("http://ricbox.com/airport/" + map.get("residence"), String.class);
+            if (Objects.equals(residenceZipcode, originationZipcode)) {
                 match = match + 1;
             }
 
