@@ -146,14 +146,24 @@ public class FrompmTest {
         String passengers = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
         List<Map> passengerList = objectMapper.readValue(passengers, List.class);
         int numberOfPassengers = passengerList.size();
-        Map<String,Integer> counterMap = new HashMap<>();
+        Map<String, Integer> counterMap = new HashMap<>();
         for (Map row : passengerList) {
             String zipResponse = testRestTemplate.getForObject("http://ricbox.com/airport/" + row.get("origination"), String.class);
             List<Map> zipList = objectMapper.readValue(zipResponse, List.class);
             String zip = (String) zipList.get(0).get("zip");
+            if (counterMap.containsKey(zip)) {
+                counterMap.put(zip, counterMap.get(zip) + 1);
+            } else {
+                counterMap.put(zip, 1);
+            }
 
         }
-
+        for (Map.Entry<String,Integer> entry :counterMap.entrySet()){
+            if ((float) entry.getValue() / numberOfPassengers > 0.5){
+                return;
+            }
+        }
+        fail("no zip code had more than 50 percent of the passengers");
     }
 
 
