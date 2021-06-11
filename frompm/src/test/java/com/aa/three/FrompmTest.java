@@ -144,19 +144,17 @@ public class FrompmTest {
         // calculate the percentage and assert the two
         //{ "zip" : "75006" }
         String passengers = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
-        List<Map> jsonData = objectMapper.readValue(passengers, List.class);
+        List<Map> passengerList = objectMapper.readValue(passengers, List.class);
+        int numberOfPassengers = passengerList.size();
+        Map<String,Integer> counterMap = new HashMap<>();
+        for (Map row : passengerList) {
+            String zipResponse = testRestTemplate.getForObject("http://ricbox.com/airport/" + row.get("origination"), String.class);
+            List<Map> zipList = objectMapper.readValue(zipResponse, List.class);
+            String zip = (String) zipList.get(0).get("zip");
+
+        }
+
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
     @Test
