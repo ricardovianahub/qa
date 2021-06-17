@@ -136,6 +136,14 @@ public class FrompmTest {
     }
 
     @Test
+    void multiplicationReturnDouble() {
+        String doubleValue = testRestTemplate.getForObject("http://ricbox.com/multiplication/5", String.class);
+        assertTrue(doubleValue.equals("10"));
+
+    }
+
+
+    @Test
     void ensureAtleastFiftypercentPaxDepartFromSameZipcode() throws JsonProcessingException {
         //We want a test that will pass if more than 50% of the passengers - ricbox.com/passengers
         // -count total number of passengers
@@ -150,13 +158,13 @@ public class FrompmTest {
         for (Map row : passengerList) {
             String zipResponse = testRestTemplate.getForObject("http://ricbox.com/airport/" + row.get("origination"), String.class);
             List<Map> zipList = objectMapper.readValue(zipResponse, List.class);
-            String zip = (String) zipList.get(0).get("zip");
+            Map zipRow = zipList.get(0);
+            String zip = (String) zipRow.get("zip");
             if (counterMap.containsKey(zip)) {
                 counterMap.put(zip, counterMap.get(zip) + 1);
             } else {
                 counterMap.put(zip, 1);
             }
-
         }
         for (Map.Entry<String,Integer> entry :counterMap.entrySet()){
             if ((float) entry.getValue() / numberOfPassengers > 0.5){
@@ -165,6 +173,7 @@ public class FrompmTest {
         }
         fail("no zip code had more than 50 percent of the passengers");
     }
+
 
 
     @Test
