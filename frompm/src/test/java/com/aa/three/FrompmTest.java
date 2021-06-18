@@ -137,9 +137,12 @@ public class FrompmTest {
 
     @Test
     void multiplicationReturnDouble() {
-        String doubleValue = testRestTemplate.getForObject("http://ricbox.com/multiplication/5", String.class);
-        assertTrue(doubleValue.equals("10"));
-
+        String doubleValue1 = testRestTemplate.getForObject("http://ricbox.com/multiplication/5", String.class);
+        assertTrue(doubleValue1.equals("10"));
+        String doubleValue2 = testRestTemplate.getForObject("http://ricbox.com/multiplication/7", String.class);
+        assertTrue(doubleValue2.equals("14"));
+        String doubleValue3 = testRestTemplate.getForObject("http://ricbox.com/multiplication/3", String.class);
+        assertTrue(doubleValue3.equals("6"));
     }
 
 
