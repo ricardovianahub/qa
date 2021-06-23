@@ -130,6 +130,33 @@ public class FrompmTest {
         );
     }
 
+    //multiplication returns double
+    //multiplication is the service
+    @Test
+    void multiplicationReturnsDouble() {
+        String value = "5";
+        String expected = "10";
+        assertEquals(
+                expected,
+                testRestTemplate.getForObject("http://ricbox.com/multiplication/" + value, String.class),
+                "Value returned is not " + expected
+        );
+        value = "7";
+        expected = "14";
+        assertEquals(
+                expected,
+                testRestTemplate.getForObject("http://ricbox.com/multiplication/" + value, String.class),
+                "Value returned is not " + expected
+        );
+        value = "3";
+        expected = "6";
+        assertEquals(
+                expected,
+                testRestTemplate.getForObject("http://ricbox.com/multiplication/" + value, String.class),
+                "Value returned is not " + expected
+        );
+    }
+
     @Test
     void ensureAtleastFiftypercentPaxDepartFromSameZipcode() throws JsonProcessingException {
         // test that will pass if more than 50% of the passengers take off from the same ZIP code, it not necessarily the same airport
