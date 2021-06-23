@@ -137,16 +137,9 @@ public class FrompmTest {
     }
 
     @Test
-    void multiplicationReturnsDouble() {
+    void multiplicationReturnsDoubleWithMethod() {
         String value = "5";
         String expected = "10";
-        assertEquals(
-                expected,
-                testRestTemplate.getForObject("http://ricbox.com/multiplication/" + value, String.class),
-                "value returned is not" + expected
-         );
-        value = "7";
-        expected = "14";
         assertEquals(
                 expected,
                 testRestTemplate.getForObject("http://ricbox.com/multiplication/" + value, String.class),
@@ -154,6 +147,45 @@ public class FrompmTest {
         );
         value = "7";
         expected = "14";
+        assertEquals(
+                expected,
+                testRestTemplate.getForObject("http://ricbox.com/multiplication/" + value, String.class),
+                "value returned is not" + expected
+        );
+        value = "3";
+        expected = "6";
+        assertMultiplication("6", "3");
+        assertEquals(
+                expected,
+                testRestTemplate.getForObject("http://ricbox.com/multiplication/" + value, String.class),
+                "value returned is not" + expected
+        );
+    }
+
+    void assertMultiplication(String expected, String value) {
+        System.out.println(expected);
+        System.out.println(value);
+    }
+
+
+    @Test
+    void multiplicationReturnsDoubleWithParameterizedTest() {
+        String value = "5";
+        String expected = "10";
+        assertEquals(
+                expected,
+                testRestTemplate.getForObject("http://ricbox.com/multiplication/" + value, String.class),
+                "value returned is not" + expected
+        );
+        value = "7";
+        expected = "14";
+        assertEquals(
+                expected,
+                testRestTemplate.getForObject("http://ricbox.com/multiplication/" + value, String.class),
+                "value returned is not" + expected
+        );
+        value = "6";
+        expected = "3";
         assertEquals(
                 expected,
                 testRestTemplate.getForObject("http://ricbox.com/multiplication/" + value, String.class),
