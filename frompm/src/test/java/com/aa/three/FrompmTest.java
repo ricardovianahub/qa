@@ -21,6 +21,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.aa.improvekataben.FromPMApplication;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.test.web.client.ExpectedCount;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -136,6 +137,31 @@ public class FrompmTest {
     }
 
     @Test
+    void multiplicationReturnsDouble() {
+        String value = "5";
+        String expected = "10";
+        assertEquals(
+                expected,
+                testRestTemplate.getForObject("http://ricbox.com/multiplication/" + value, String.class),
+                "value returned is not" + expected
+         );
+        value = "7";
+        expected = "14";
+        assertEquals(
+                expected,
+                testRestTemplate.getForObject("http://ricbox.com/multiplication/" + value, String.class),
+                "value returned is not" + expected
+        );
+        value = "7";
+        expected = "14";
+        assertEquals(
+                expected,
+                testRestTemplate.getForObject("http://ricbox.com/multiplication/" + value, String.class),
+                "value returned is not" + expected
+        );
+    }
+
+    @Test
     void multiplicationReturnDouble() {
         String doubleValue1 = testRestTemplate.getForObject("http://ricbox.com/multiplication/5", String.class);
         assertTrue(doubleValue1.equals("10"));
@@ -169,14 +195,13 @@ public class FrompmTest {
                 counterMap.put(zip, 1);
             }
         }
-        for (Map.Entry<String,Integer> entry :counterMap.entrySet()){
-            if ((float) entry.getValue() / numberOfPassengers > 0.5){
+        for (Map.Entry<String, Integer> entry : counterMap.entrySet()) {
+            if ((float) entry.getValue() / numberOfPassengers > 0.5) {
                 return;
             }
         }
         fail("no zip code had more than 50 percent of the passengers");
     }
-
 
 
     @Test
