@@ -174,7 +174,7 @@ public class FrompmTest {
 //
 //    }
     @ParameterizedTest
-    @CsvSource({"7,3,4"})
+    @CsvSource({"7,3,4","15,5,10","40,1,39"})
     void additionReturnsSumOfTwoNumbers(String expected, String value1, String value2) {
         assertEquals(
                 expected,
