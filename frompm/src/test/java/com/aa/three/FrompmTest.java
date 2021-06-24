@@ -154,7 +154,6 @@ public class FrompmTest {
     @ParameterizedTest
     @CsvSource({"10,5", "14,7", "6,3"})
     void multiplicationReturnsDoubleWithParameterizedTest(String expected, String value) {
-
         assertEquals(
                 expected,
                 testRestTemplate.getForObject("http://ricbox.com/multiplication/" + value, String.class),
@@ -162,7 +161,28 @@ public class FrompmTest {
         );
 
     }
+//    @Test
+//    void additionReturnsSumOfTwoNumbers() {
+//        String value1 = "3";
+//        String value2 = "4";
+//        String expected = "7";
+//        assertEquals(
+//                expected,
+//                testRestTemplate.getForObject("http://ricbox.com/addition/" + value1 +"/"+ value2, String.class),
+//                "Value returned is not " + expected
+//        );
+//
+//    }
+    @ParameterizedTest
+    @CsvSource({"7,3,4"})
+    void additionReturnsSumOfTwoNumbers(String expected, String value1, String value2) {
+        assertEquals(
+                expected,
+                testRestTemplate.getForObject("http://ricbox.com/addition/" + value1 +"/"+ value2, String.class),
+                "Value returned is not " + expected
+        );
 
+    }
     @Test
     void ensureAtleastFiftypercentPaxDepartFromSameZipcode() throws JsonProcessingException {
         // test that will pass if more than 50% of the passengers take off from the same ZIP code, it not necessarily the same airport
