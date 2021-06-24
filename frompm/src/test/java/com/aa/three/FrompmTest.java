@@ -12,6 +12,8 @@ import org.aspectj.bridge.IMessage;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -134,23 +136,13 @@ public class FrompmTest {
     //multiplication is the service
     @Test
     void multiplicationReturnsDoubleWithMethod() {
-        String value = "5";
-        String expected = "10";
-        assertEquals(
-                expected,
-                testRestTemplate.getForObject("http://ricbox.com/multiplication/" + value, String.class),
-                "Value returned is not " + expected
-        );
-        value = "7";
-        expected = "14";
-        assertEquals(
-                expected,
-                testRestTemplate.getForObject("http://ricbox.com/multiplication/" + value, String.class),
-                "Value returned is not " + expected
-        );
-        value = "3";
-        expected = "6";
-        assertMultiplication("6","3");
+        assertMultiplication("10", "5");
+        assertMultiplication("14", "7");
+        assertMultiplication("6", "3");
+
+    }
+
+    void assertMultiplication(String expected, String value) {
         assertEquals(
                 expected,
                 testRestTemplate.getForObject("http://ricbox.com/multiplication/" + value, String.class),
@@ -158,37 +150,19 @@ public class FrompmTest {
         );
     }
 
-    void assertMultiplication(String expected, String value){
-        System.out.println(expected);
-        System.out.println(value);
+
+    @ParameterizedTest
+    @CsvSource({"10,5", "14,7", "6,3"})
+    void multiplicationReturnsDoubleWithParameterizedTest(String expected, String value) {
+
+        assertEquals(
+                expected,
+                testRestTemplate.getForObject("http://ricbox.com/multiplication/" + value, String.class),
+                "Value returned is not " + expected
+        );
+
     }
 
-
-
-    @Test
-    void multiplicationReturnsDoubleWithParameterizedTest() {
-        String value = "5";
-        String expected = "10";
-        assertEquals(
-                expected,
-                testRestTemplate.getForObject("http://ricbox.com/multiplication/" + value, String.class),
-                "Value returned is not " + expected
-        );
-        value = "7";
-        expected = "14";
-        assertEquals(
-                expected,
-                testRestTemplate.getForObject("http://ricbox.com/multiplication/" + value, String.class),
-                "Value returned is not " + expected
-        );
-        value = "3";
-        expected = "6";
-        assertEquals(
-                expected,
-                testRestTemplate.getForObject("http://ricbox.com/multiplication/" + value, String.class),
-                "Value returned is not " + expected
-        );
-    }
     @Test
     void ensureAtleastFiftypercentPaxDepartFromSameZipcode() throws JsonProcessingException {
         // test that will pass if more than 50% of the passengers take off from the same ZIP code, it not necessarily the same airport
