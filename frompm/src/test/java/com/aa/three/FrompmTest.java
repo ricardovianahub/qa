@@ -1,27 +1,25 @@
 package com.aa.three;
 
+import com.aa.improvekataben.FromPMApplication;
+import com.aa.improvekataben.api.createpnr.CreatePNRRequest;
+import com.aa.improvekataben.api.createpnr.CreatePNRResponse;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
-
-import com.aa.improvekataben.api.createpnr.CreatePNRRequest;
-import com.aa.improvekataben.api.createpnr.CreatePNRResponse;
-
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.server.DelegatingServerHttpResponse;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import com.aa.improvekataben.FromPMApplication;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.test.web.client.ExpectedCount;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -184,13 +182,21 @@ public class FrompmTest {
                 testRestTemplate.getForObject("http://ricbox.com/multiplication/" + value, String.class),
                 "value returned is not" + expected
         );
-        value = "6";
-        expected = "3";
+        value = "3";
+        expected = "6";
         assertEquals(
                 expected,
                 testRestTemplate.getForObject("http://ricbox.com/multiplication/" + value, String.class),
                 "value returned is not" + expected
         );
+    }
+
+    @Test
+    void ensureLengthOfStringsReturnsTwenty() {
+        checkStringLength("keyboard123", "baseboard");
+    }
+    void checkStringLength(String dallas, String texas) {
+        assertEquals(20, dallas.length() + texas.length());
     }
 
     @Test
@@ -372,5 +378,4 @@ public class FrompmTest {
         }
     }
 }
-
 

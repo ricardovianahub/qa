@@ -24,9 +24,9 @@ dependencies {
 			'org.junit.jupiter:junit-jupiter-params:5.3.1'
 	)
 
-	testCompile(
-			'io.github.bonigarcia:selenium-jupiter:3.3.5'
-	)
+//	testCompile(
+//			'io.github.bonigarcia:selenium-jupiter:3.3.5'
+//	)
 }
 
 test {
