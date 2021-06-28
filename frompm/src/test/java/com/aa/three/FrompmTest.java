@@ -191,11 +191,9 @@ public class FrompmTest {
         );
     }
 
-    @Test
-    void ensureLengthOfStringsReturnsTwenty() {
-        checkStringLength("keyboard123", "baseboard");
-    }
-    void checkStringLength(String dallas, String texas) {
+    @ParameterizedTest
+    @CsvSource({"keyboard123,baseboard"})
+    void ensureLengthOfStringsReturnsTwenty(String dallas, String texas) {
         assertEquals(20, dallas.length() + texas.length());
     }
 
