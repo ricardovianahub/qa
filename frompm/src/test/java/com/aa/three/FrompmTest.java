@@ -183,6 +183,16 @@ public class FrompmTest {
         );
 
     }
+    @ParameterizedTest
+    @CsvSource({"hello,worldsrisatyach"})
+    void ConcatenateTwoStrings(String value1, String value2) {
+            assertEquals(
+              20
+              ,value1.length()+value2.length()
+              ,"Value returned is not " + 20
+        );
+
+    }
     @Test
     void ensureAtleastFiftypercentPaxDepartFromSameZipcode() throws JsonProcessingException {
         // test that will pass if more than 50% of the passengers take off from the same ZIP code, it not necessarily the same airport
