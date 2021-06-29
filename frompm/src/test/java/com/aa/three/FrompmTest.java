@@ -185,7 +185,7 @@ public class FrompmTest {
     }
     @ParameterizedTest
     @CsvSource({"hello,worldsrisatyach"})
-    void ConcatenateTwoStrings(String value1, String value2) {
+    void ensureConcatenateTwoStringsReturnsLengthOfTwenty(String value1, String value2) {
             assertEquals(
               20
               ,value1.length()+value2.length()
