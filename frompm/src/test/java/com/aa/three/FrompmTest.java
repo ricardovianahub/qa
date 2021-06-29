@@ -195,7 +195,25 @@ public class FrompmTest {
     @CsvSource({"keyboard123,baseboard"})
     void ensureLengthOfStringsReturnsTwenty(String dallas, String texas) {
         assertEquals(20, dallas.length() + texas.length());
+
     }
+
+    @Test
+    void ensureLengthOfStringsReturnsTwenty() {
+        assertConcatenation("hello", "world");
+        assertEquals(
+         20,
+        actual,
+        "Value returned is not " + 20
+    );
+}
+Integer assertConcatenation (String value1, String value2){
+        Integer actual = value1.length()value2.length();
+        return actual;
+
+
+
+}
 
     @Test
     void multiplicationReturnDouble() {
