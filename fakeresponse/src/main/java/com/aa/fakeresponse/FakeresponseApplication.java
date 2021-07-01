@@ -2,13 +2,16 @@ package com.aa.fakeresponse;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -65,19 +68,60 @@ public class FakeresponseApplication {
     @GetMapping(value = "/three", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Data3> three() {
         List<Data3> data3List = new ArrayList<>();
-        data3List.add(new Data3("ORDDFW", "Tomatoes", "Mrs", "Carrots", "555-1234", "sdfgs ert3John Doe", "John Doe"));
-        data3List.add(new Data3("ORDDFW", "Tomatoes", "Mrs", "Carrots", "555-1234", "sdsdfJohn Doe", "John Doe"));
-        data3List.add(new Data3("ORDDFW", "Tomatoes", "Mrs", "Carrots", "555-1234", "John Doe", "John Doe"));
-        data3List.add(new Data3("ORDDFW", "Tomatoes", "Mrs", "Carrots", "555-1234", "rtuJane Doe", "Jane Doe"));
-        data3List.add(new Data3("ORDDFW", "Tomatoes", "Mrs", "Carrots", "555-1234", "srr tusrJohn Doe", "John Doe"));
-        data3List.add(new Data3("DFWLAX", "Carrots", "Mr", "", "555-1234", "rtyrttyJohn Doe", "John Doe"));
-        data3List.add(new Data3("LAXYYZ", "Ice Cream", "Miss", "", "555-1234", "gggggJohn Doe", "John Doe"));
-        data3List.add(new Data3("LAXYYZ", "Ice Cream", "Miss", "    ", "555-1234", "dfgdfgJohn Doe", "John Doe"));
-        data3List.add(new Data3("LAXYYZ", "Ice Cream", "Miss", " ", "555-1234", "John Doe", "John Doe"));
-        data3List.add(new Data3("LAXYYZ", "Ice Cream", "Miss", "   ", "555-1234", "d fgdgdfgJohn Doe", "John Doe"));
-        data3List.add(new Data3("LAXYYZ", "Ice Cream", "Miss", "LAX", "555-1234", "sJohn Doe", "John Doe"));
+        data3List.add(new Data3("ORDDFW", "ORD", "Mrs", "DFW", "555-1234", "sdfgs ert3John Doe", "John Doe"));
+        data3List.add(new Data3("ORDDFW", "ORD", "Mrs", "DFW", "555-1234", "sdsdfJohn Doe", "John Doe"));
+        data3List.add(new Data3("ORDDFW", "ORD", "Mrs", "DFW", "555-1234", "John Doe", "John Doe"));
+        data3List.add(new Data3("ORDDFW", "ORD", "Mrs", "DFW", "555-1234", "rtuJane Doe", "Jane Doe"));
+        data3List.add(new Data3("ORDDFW", "ORD", "Mrs", "DFW", "555-1234", "srr tusrJohn Doe", "John Doe"));
+        data3List.add(new Data3("DFWLAX", "DFW", "Mr", "LAX", "555-1234", "rtyrttyJohn Doe", "John Doe"));
+        data3List.add(new Data3("LAXYYZ", "LAX", "Miss", "YYZ", "555-1234", "gggggJohn Doe", "John Doe"));
+        data3List.add(new Data3("LAXYYZ", "LAX", "Miss", "YYZ", "555-1234", "dfgdfgJohn Doe", "John Doe"));
+        data3List.add(new Data3("LAXYYZ", "LAX", "Miss", "YYZ", "555-1234", "John Doe", "John Doe"));
+        data3List.add(new Data3("LAXYYZ", "LAX", "Miss", "YYZ", "555-1234", "d fgdgdfgJohn Doe", "John Doe"));
+        data3List.add(new Data3("LAXYYZ", "LAX", "Miss", "YYZ", "555-1234", "sJohn Doe", "John Doe"));
 
         return data3List;
+    }
+
+    @GetMapping(value = "/passengers", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<DataPassengers> passengers() {
+        List<DataPassengers> data3List = new ArrayList<>();
+        data3List.add(new DataPassengers("John", "Doe", "LAX", "DAL"));
+        data3List.add(new DataPassengers("James", "Doe", "DFW", "DAL"));
+        data3List.add(new DataPassengers("Julia", "Doe", "YYZ", "DAL"));
+        data3List.add(new DataPassengers("Jennifer", "Doe", "DAL", "DAL"));
+        data3List.add(new DataPassengers("Jimes", "Doe", "DFW", "DAL"));
+        data3List.add(new DataPassengers("Jannifer", "Doe", "DAL", "DAL"));
+        data3List.add(new DataPassengers("Jomes", "Doe", "DFW", "DAL"));
+        data3List.add(new DataPassengers("Jinnifer", "Doe", "DAL", "DAL"));
+        data3List.add(new DataPassengers("Jumes", "Doe", "DFW", "DAL"));
+        data3List.add(new DataPassengers("Jonnifer", "Doe", "DAL", "DAL"));
+        data3List.add(new DataPassengers("Jymes", "Doe", "DFW", "DAL"));
+        data3List.add(new DataPassengers("Joanna", "Doe", "ORD", "ORD"));
+        data3List.add(new DataPassengers("Jezebel", "Doe", "YYZ", "YYZ"));
+        data3List.add(new DataPassengers("Jillian", "Doe", "LAX", "LAX"));
+        data3List.add(new DataPassengers("Julian", "Doe", "GRU", "GRU"));
+
+        return data3List;
+    }
+
+    @GetMapping(value = "/airport/{airportCode}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<AirportResponse> airport(@PathVariable String airportCode) {
+        return new ArrayList<>() {
+            {
+                add(new AirportResponse().setZip(airportZipCodes.get(airportCode)));
+            }
+        };
+    }
+
+    @GetMapping(value = "/multiplication/{number}", produces = MediaType.TEXT_PLAIN_VALUE)
+    public String multiplication(@PathVariable String number) {
+        return String.valueOf(Integer.parseInt(number) * 2);
+    }
+
+    @GetMapping(value = "/addition/{number1}/{number2}", produces = MediaType.TEXT_PLAIN_VALUE)
+    public String multiplication(@PathVariable String number1, @PathVariable String number2) {
+        return String.valueOf(Integer.parseInt(number1) + Integer.parseInt(number2));
     }
 
     @GetMapping(value = "/one", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -123,6 +167,36 @@ public class FakeresponseApplication {
 
         public String getCarrier() {
             return carrier;
+        }
+    }
+
+    public static class DataPassengers {
+        private String firstName;
+        private String lastName;
+        private String origination;
+        private String residence;
+
+        public DataPassengers(String firstName, String lastName, String origination, String residence) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.origination = origination;
+            this.residence = residence;
+        }
+
+        public String getFirstName() {
+            return firstName;
+        }
+
+        public String getLastName() {
+            return lastName;
+        }
+
+        public String getOrigination() {
+            return origination;
+        }
+
+        public String getResidence() {
+            return residence;
         }
     }
 
@@ -248,4 +322,26 @@ public class FakeresponseApplication {
         }
     }
 
+    private Map<String, String> airportZipCodes = new HashMap<>() {{
+        put("DFW", "17732");
+        put("DAL", "17732");
+        put("ORD", "15504");
+        put("YYZ", "13302");
+        put("LAX", "13301");
+        put("GRU", "13300");
+        put("JFK", "75006");
+    }};
+
+    private class AirportResponse {
+        private String zip;
+
+        public String getZip() {
+            return zip;
+        }
+
+        public AirportResponse setZip(String zip) {
+            this.zip = zip;
+            return this;
+        }
+    }
 }

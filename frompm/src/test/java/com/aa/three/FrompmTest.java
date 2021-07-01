@@ -1,13 +1,16 @@
 package com.aa.three;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
-
-import com.aa.improvekataben.api.createpnr.CreatePNRRequest;
-import com.aa.improvekataben.api.createpnr.CreatePNRResponse;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -15,14 +18,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.server.DelegatingServerHttpResponse;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.aa.improvekataben.FromPMApplication;
+import com.aa.improvekataben.api.createpnr.CreatePNRRequest;
+import com.aa.improvekataben.api.createpnr.CreatePNRResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = FromPMApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
