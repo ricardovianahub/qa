@@ -1,6 +1,7 @@
 package com.aa.workshop;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -41,8 +42,13 @@ public class T0001MultiplicationServiceRequirementChange {
     // 351         702
 
     @ParameterizedTest
-    @CsvSource({""})
-    void testMultiples() {
+    @CsvSource({"4,2", "6,3", "20,10", "702,351"})
+    void testMultiply(String expected, String parameter) {
+        assertNotNull(parameter);
+        assertNotNull(expected);
+        assertEquals(expected,
+                testRestTemplate.getForObject("http://ricbox.com/multiplication/" + parameter, String.class),
+                "No match");
 
     }
 }
