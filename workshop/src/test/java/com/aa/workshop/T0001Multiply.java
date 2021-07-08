@@ -27,11 +27,13 @@ public class T0001Multiply {
 
     @ParameterizedTest
     @CsvSource({"4,2", "6,3", "20,10", "702,351"})
-    void testMultiply(String expected, String value) {
-        assertNotNull(value);
+    void testMultiply(String expected, String parameter) {
+        assertNotNull(parameter);
+        assertNotNull(expected);
         assertEquals(expected,
-                testRestTemplate.getForObject("http://ricbox.com/multiplication/" + value, String.class),
-                "Not expected");
+                testRestTemplate.getForObject("http://ricbox.com/multiplication/" + parameter, String.class),
+                "No match");
 
     }
+
 }
