@@ -40,13 +40,23 @@ public class T0002AdditionServiceRequimentChange {
 
     @Test
     void additionWithMultipleAsserts() {
-
+        assertEquals("2", testRestTemplate.getForObject("http://ricbox.com/addition/1/1", String.class));
+        assertEquals("5", testRestTemplate.getForObject("http://ricbox.com/addition/3/2", String.class));
+        assertEquals("1937", testRestTemplate.getForObject("http://ricbox.com/addition/1900/37", String.class));
+        assertEquals("100", testRestTemplate.getForObject("http://ricbox.com/addition/36/64", String.class));
     }
 
     @ParameterizedTest
-    @CsvSource({"", "", "", ""})
-    void additionWithParameters() {
-
+    @CsvSource({"2,1,1", "5,3,2", "1937,1900,37", "100,36,64"})
+    void additionWithParameters(String expected, String first, String second) {
+        assertEquals(expected,
+                testRestTemplate.getForObject(
+                        "http://ricbox.com/addition/" + first + "/" + second,
+                        String.class
+                )
+        );
     }
+
+    // http://ricbox.com/addition/1900/37
 
 }
