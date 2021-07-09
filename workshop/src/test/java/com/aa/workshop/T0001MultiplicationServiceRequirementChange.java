@@ -48,7 +48,7 @@ public class T0001MultiplicationServiceRequirementChange {
         assertNotNull(expected);
         assertEquals(expected,
                 testRestTemplate.getForObject("http://ricbox.com/multiplication/" + parameter, String.class),
-                "No match");
-
+                "No match"
+        );
     }
 }

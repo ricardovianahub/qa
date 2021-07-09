@@ -124,6 +124,11 @@ public class FakeresponseApplication {
         return String.valueOf(Integer.parseInt(number1) + Integer.parseInt(number2));
     }
 
+    @GetMapping(value = "/dash/{text1}/{text2}/{text3}", produces = MediaType.TEXT_PLAIN_VALUE)
+    public String dash(@PathVariable String text1, @PathVariable String text2, @PathVariable String text3) {
+        return text1 + "-" + text2 + "-" + text3;
+    }
+
     @GetMapping(value = "/one", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Data1> one() {
         List<Data1> data1List = new ArrayList<>();
