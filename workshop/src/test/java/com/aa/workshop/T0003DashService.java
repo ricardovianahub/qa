@@ -46,4 +46,27 @@ public class T0003DashService {
     // -----
     // I-did-it
 
+    @ParameterizedTest
+    @CsvSource({"hello-world-hello,hello,world,hello", "1-2-3,1,2,3", "-----,-,-,-", "I-did-it,I,did,it"})
+    void response(String expected, String one, String two, String three) {
+        String response = testRestTemplate.getForObject(
+                "http://ricbox.com/dash/" + one + "/" + two + "/" + three,
+                String.class
+        );
+        assertEquals(expected, response);
+    }
+
 }
+
+// what does this service do? it receives 3 parameters and returns them with hyphens/dashes between them
+// If it receives a b c it will return a-b-c
+// So what should be my 3 parameters if I am expecting ----- ?
+// -----
+// a-b-c
+//
+// To ensure that test will run without the "Test not found" type of message, make sure that your test is being
+// executed by IntelliJ, not Gradle
+// How do you do that? File > Settings > (Search for "Gradle") then follow the steps in the video
+// If this is confusing, I can reconfigure your IntelliJs during our live sessions. This only needs to be done
+// once per local project
+// After you do this, delete all test profiles (see video)
