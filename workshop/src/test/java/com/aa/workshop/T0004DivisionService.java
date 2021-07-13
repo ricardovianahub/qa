@@ -31,8 +31,14 @@ public class T0004DivisionService {
     // http://ricbox.com/division/ - 3 parameters - 1 expected 2 factors
     //
     // Directions:
-    // - 4 scenarios
+    // X 4 scenarios
     // - Once the scenarios are in place, code the test
     // - Use the past services as an example to design the call to the division service
+
+    // Expected result    1st   2nd
+    //              2       4     8
+    //              5       3    15
+    //              3      10    30
+    //              9       9    81
 
 }
