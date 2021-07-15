@@ -2,6 +2,9 @@ package com.aa.workshop;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,16 +24,23 @@ public class T0005AlphaService {
 
     // These are the answers that we should try to understand before we run the tests:
     // Which ones of these should be true and which ones should be false?
-    // "abc " - ?
+    // "abc " - ? "john doe"
     // "a1b" - ?
     // "abc?" - ?
+    // = &
+    // http://server.com/service/value1/value2
+    // http://server.com/service?param1=value1&param2=value2
+    // Backwards compatibility
+    // HTML encoding = space %20 - question mark %3F
 
     @Test
-    void alpha() {
-        String response1 = testRestTemplate.getForObject("http://ricbox.com/alpha/abc", String.class);
-        assertEquals("true", response1);
+    void alpha() throws URISyntaxException {
+        String response1 = testRestTemplate.getForObject(new URI("http://ricbox.com/alpha/abc%3F"), String.class);
+        assertEquals("false", response1);
         String response2 = testRestTemplate.getForObject("http://ricbox.com/alpha/123", String.class);
         assertEquals("false", response2);
+        String response3 = testRestTemplate.getForObject(new URI("http://ricbox.com/alpha/abc%20"), String.class);
+        assertEquals("false", response3);
     }
 
 }
