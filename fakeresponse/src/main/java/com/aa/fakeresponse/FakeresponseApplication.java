@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.regex.Pattern;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -124,9 +125,20 @@ public class FakeresponseApplication {
         return String.valueOf(Integer.parseInt(number1) + Integer.parseInt(number2));
     }
 
+    @GetMapping(value = "/division/{number1}/{number2}", produces = MediaType.TEXT_PLAIN_VALUE)
+    public String division(@PathVariable String number1, @PathVariable String number2) {
+        return String.valueOf(Integer.parseInt(number2) / Integer.parseInt(number1));
+    }
+
     @GetMapping(value = "/dash/{text1}/{text2}/{text3}", produces = MediaType.TEXT_PLAIN_VALUE)
     public String dash(@PathVariable String text1, @PathVariable String text2, @PathVariable String text3) {
         return text1 + "-" + text2 + "-" + text3;
+    }
+
+    @GetMapping(value = "/alpha/{text}", produces = MediaType.TEXT_PLAIN_VALUE)
+    public String alpha(@PathVariable String text) {
+        Pattern pattern = Pattern.compile("[a-zA-Z]+");
+        return pattern.matcher(text).matches() ? "true" : "false";
     }
 
     @GetMapping(value = "/one", produces = MediaType.APPLICATION_JSON_VALUE)
