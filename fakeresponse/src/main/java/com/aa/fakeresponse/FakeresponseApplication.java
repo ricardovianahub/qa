@@ -137,6 +137,7 @@ public class FakeresponseApplication {
 
     @GetMapping(value = "/alpha/{text}", produces = MediaType.TEXT_PLAIN_VALUE)
     public String alpha(@PathVariable String text) {
+        System.out.println("Received: [" + text + "]");
         Pattern pattern = Pattern.compile("[a-zA-Z]+");
         return pattern.matcher(text).matches() ? "true" : "false";
     }
