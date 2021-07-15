@@ -41,4 +41,12 @@ public class T0004DivisionService {
     //              3      10    30
     //              9       9    81
 
+    @Test
+    void division() {
+        assertEquals("2", testRestTemplate.getForObject("http://ricbox.com/division/4/8", String.class));
+        assertEquals("5", testRestTemplate.getForObject("http://ricbox.com/division/3/15", String.class));
+        assertEquals("3", testRestTemplate.getForObject("http://ricbox.com/division/10/30", String.class));
+        assertEquals("9", testRestTemplate.getForObject("http://ricbox.com/division/9/81", String.class));
+    }
+
 }
