@@ -26,12 +26,12 @@ public class T0008ConcatenateNames {
     private ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
-    void serviceCall() throws JsonProcessingException {
+    void testJulian() throws JsonProcessingException {
         String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
         List<Map> lines = objectMapper.readValue(response, List.class);
         Boolean foundIt = false;
         for (Map map : lines) {
-            if (map.get("firstName").equals("John")) {
+            if (map.get("origination").equals("DFW")) {
                 foundIt = true;
             }
         }
@@ -39,22 +39,26 @@ public class T0008ConcatenateNames {
     }
 
     @Test
-    void concatenation() {
-        String a = "The";
-        String b = "quick brown fox";
-        String c = "jumped over";
+    void concatenateSeveralStrings() {
+        String a = "The quick brown fox";
+        String b = "jumps over the";
 
-        String actual = a + " " + b + " " + c + " the lazy dog";
+        String result = a + " " + b + " lazy dog";
 
-        assertEquals("The quick brown fox jumped over the lazy dog", actual);
+        assertEquals("The quick brown fox jumps over the lazy dog", result);
     }
-
-    // Call the passengers service, and concatenate the first names of all passengers whose origination airport is DFW
-    // Expected result: JamesJimesJomesJumesJymes
 
     @Test
-    void concatenateNames() {
+    void stringBuiltStepByStep() {
+        String result = "";
+        result = result + "a";
 
+        assertEquals("a", result);
+
+        result = result + "b";
+        assertEquals("ab", result);
     }
+
+    // Assert that the first names of all passengers whose origination is DFW are equal to JamesJimesJomesJumesJymes
 
 }
