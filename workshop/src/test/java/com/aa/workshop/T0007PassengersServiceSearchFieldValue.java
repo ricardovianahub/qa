@@ -1,6 +1,7 @@
 package com.aa.workshop;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import java.util.Map;
@@ -17,20 +18,27 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = WorkshopApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class T0006PassengersService {
+public class T0007PassengersServiceSearchFieldValue {
 
     @Autowired
     private TestRestTemplate testRestTemplate;
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    // Confirm/assert that the number of lines in the response is 15
+    // Confirm that at least one passenger has an origination airport of YYZ
 
     @Test
-    void test() throws JsonProcessingException {
+    void testYYZ() throws JsonProcessingException {
         String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
         List<Map> lines = objectMapper.readValue(response, List.class);
-        assertEquals(15, lines.size());
+        Boolean foundIt = false;
+        for (Map map : lines) {
+            if (map.get("origination").equals("YYZ")) {
+                foundIt = true;
+            }
+        }
+        assertTrue(foundIt);
     }
 
+    // Confirm that at least one passenger has the first name Julian
 }
