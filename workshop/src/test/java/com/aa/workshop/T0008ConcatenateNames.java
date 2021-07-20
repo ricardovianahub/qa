@@ -61,4 +61,16 @@ public class T0008ConcatenateNames {
 
     // Assert that the first names of all passengers whose origination is DFW are equal to JamesJimesJomesJumesJymes
 
+    @Test
+    void concatenateFirstNames() throws JsonProcessingException {
+        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        List<Map> lines = objectMapper.readValue(response, List.class);
+        String result = "";
+        for (Map map : lines) {
+            if (map.get("origination").equals("DFW")) {
+                result = result + map.get("firstName");
+            }
+        }
+        assertEquals("JamesJimesJomesJumesJymes", result);
+    }
 }
