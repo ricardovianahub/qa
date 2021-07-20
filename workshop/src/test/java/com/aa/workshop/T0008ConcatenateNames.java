@@ -18,40 +18,43 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = WorkshopApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class T0007PassengersServiceSearchFieldValue {
+public class T0008ConcatenateNames {
 
     @Autowired
     private TestRestTemplate testRestTemplate;
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    // Confirm that at least one passenger has an origination airport of YYZ
-
     @Test
-    void testYYZ() throws JsonProcessingException {
+    void serviceCall() throws JsonProcessingException {
         String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
         List<Map> lines = objectMapper.readValue(response, List.class);
         Boolean foundIt = false;
         for (Map map : lines) {
-            if (map.get("origination").equals("YYZ")) {
+            if (map.get("firstName").equals("John")) {
                 foundIt = true;
             }
         }
         assertTrue(foundIt);
     }
 
-    // Confirm that at least one passenger has the first name Julian
+    @Test
+    void concatenation() {
+        String a = "The";
+        String b = "quick brown fox";
+        String c = "jumped over";
+
+        String actual = a + " " + b + " " + c + " the lazy dog";
+
+        assertEquals("The quick brown fox jumped over the lazy dog", actual);
+    }
+
+    // Call the passengers service, and concatenate the first names of all passengers whose origination airport is DFW
+    // Expected result: JimesJomesJumesJymes
 
     @Test
-    void testJulian() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
-        List<Map> lines = objectMapper.readValue(response, List.class);
-        Boolean foundIt = false;
-        for (Map map : lines) {
-            if (map.get("firstName").equals("Julian")) {
-                foundIt = true;
-            }
-        }
-        assertTrue(foundIt);
+    void concatenateNames() {
+
     }
+
 }
