@@ -50,7 +50,7 @@ public class T0008ConcatenateNames {
     }
 
     // Call the passengers service, and concatenate the first names of all passengers whose origination airport is DFW
-    // Expected result: JimesJomesJumesJymes
+    // Expected result: JamesJimesJomesJumesJymes
 
     @Test
     void concatenateNames() {
