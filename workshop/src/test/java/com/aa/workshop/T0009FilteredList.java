@@ -57,4 +57,17 @@ public class T0009FilteredList {
     // AND whose origination is DFW
     //
 
+    @Test
+    void filterList2() throws JsonProcessingException {
+        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        List<Map> lines = objectMapper.readValue(response, List.class);
+        List<Map> output = new ArrayList<>();
+        for (Map map : lines) {
+            if (map.get("residence").equals("DAL") && map.get("origination").equals("DFW")) {
+                output.add(map);
+            }
+        }
+        assertEquals(5, output.size());
+    }
+
 }
