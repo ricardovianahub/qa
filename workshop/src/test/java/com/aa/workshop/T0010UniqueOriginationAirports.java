@@ -100,11 +100,13 @@ public class T0010UniqueOriginationAirports {
     void uniqueOriginationAirports() throws JsonProcessingException {
         String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
         List<Map> lines = objectMapper.readValue(response, List.class);
-        List<Map> uniqueOriginationAirports = new ArrayList<>();
+        List<String> uniqueOriginationAirports = new ArrayList<>();
         for (Map map : lines) {
-
+            if (!uniqueOriginationAirports.contains(map.get("origination")) ) {
+                uniqueOriginationAirports.add((String) map.get("origination"));
+            }
         }
-        assertEquals(0, uniqueOriginationAirports.size());
+        assertEquals(6, uniqueOriginationAirports.size());
     }
 
 }
