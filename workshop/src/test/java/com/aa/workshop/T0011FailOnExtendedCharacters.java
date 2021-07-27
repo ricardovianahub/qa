@@ -54,4 +54,44 @@ public class T0011FailOnExtendedCharacters {
         assertFalse(pattern.matcher("Conceição").matches());
     }
 
+    @Test
+    void failIfNonAlphabeticalCharactersArePresent_RegularExpression() throws JsonProcessingException {
+        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        List<Map> lines = objectMapper.readValue(response, List.class);
+        Pattern pattern = Pattern.compile("[a-zA-Z]+");
+        for (Map map : lines) {
+            assertTrue(pattern.matcher(String.valueOf(map.get("firstName"))).matches());
+            assertTrue(pattern.matcher(String.valueOf(map.get("secondName"))).matches());
+            assertTrue(pattern.matcher(String.valueOf(map.get("origination"))).matches());
+            assertTrue(pattern.matcher(String.valueOf(map.get("residence"))).matches());
+        }
+    }
+
+    @Test
+    void failIfNonAlphabeticalCharactersArePresent_FullResponse() {
+        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        Pattern pattern = Pattern.compile("[a-zA-Z\\[\\]{},\"]+");
+        assertTrue(pattern.matcher(response).matches());
+    }
+
+    @Test
+    void failIfNonAlphabeticalCharactersArePresent_Replace() throws JsonProcessingException {
+        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String filteredResponse = response
+                .replace('"', ' ')
+                .replace(':', ' ')
+                .replace(',', ' ')
+                .replace('[', ' ')
+                .replace(']', ' ')
+                .replace('{', ' ')
+                .replace('}', ' ');
+        Pattern pattern = Pattern.compile("[a-zA-Z ]+");
+        assertTrue(pattern.matcher(filteredResponse).matches());
+    }
+
+    @Test
+    void replaceExample() {
+        System.out.println("Workshop".replace('o', '0'));
+    }
+
 }
