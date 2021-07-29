@@ -115,6 +115,15 @@ public class FakeresponseApplication {
         };
     }
 
+    @GetMapping(value = "/airportmissing/{airportCode}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<AirportResponse> airportMissing(@PathVariable String airportCode) {
+        return new ArrayList<>() {
+            {
+                add(new AirportResponse().setZip(airportZipCodesMissing.get(airportCode)));
+            }
+        };
+    }
+
     @GetMapping(value = "/multiplication/{number}", produces = MediaType.TEXT_PLAIN_VALUE)
     public String multiplication(@PathVariable String number) {
         return String.valueOf(Integer.parseInt(number) * 2);
@@ -347,6 +356,15 @@ public class FakeresponseApplication {
         put("YYZ", "13302");
         put("LAX", "13301");
         put("GRU", "13300");
+        put("JFK", "75006");
+    }};
+
+    private Map<String, String> airportZipCodesMissing = new HashMap<>() {{
+        put("DFW", "17732");
+        put("DAL", "17732");
+        put("ORD", "15504");
+        put("YYZ", "13302");
+        put("LAX", "13301");
         put("JFK", "75006");
     }};
 
