@@ -362,8 +362,6 @@ public class FakeresponseApplication {
     private Map<String, String> airportZipCodesMissing = new HashMap<>() {{
         put("DFW", "17732");
         put("DAL", "17732");
-        put("ORD", "15504");
-        put("YYZ", "13302");
         put("LAX", "13301");
         put("JFK", "75006");
     }};
