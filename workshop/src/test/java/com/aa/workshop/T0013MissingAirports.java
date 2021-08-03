@@ -47,4 +47,33 @@ public class T0013MissingAirports {
     // Output format should be, for example, DFW - JFK - GRU ---- The String " - " should be between each airport code
     // that is missing from /airpormissing
 
+    @Test
+    void verifyMissingAirportsOfResidence() throws JsonProcessingException {
+        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        List<Map> passengers = objectMapper.readValue(response, List.class);
+        Boolean missedAirport = false;
+        String result = "";
+        for (Map passenger : passengers) {
+            if ((testRestTemplate.getForObject("http://ricbox.com/airport/" + passenger.get("residence"), String.class)
+                    .contains("null"))) {
+                missedAirport = true;
+                if (!result.equals("")) {
+                    result = result + " - ";
+                }
+                result = result + passenger.get("residence");
+            }
+            if (testRestTemplate.getForObject("http://ricbox.com/airportmissing/" + passenger.get("residence"), String.class)
+                    .contains("null")) {
+                missedAirport = true;
+                if (!result.equals("")) {
+                    result = result + " - ";
+                }
+                result = result + passenger.get("residence");
+            }
+        }
+        System.out.println("Missing airports: " + result);
+        assertFalse(missedAirport);
+    }
+
+
 }
