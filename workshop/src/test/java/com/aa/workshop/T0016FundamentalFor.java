@@ -39,6 +39,8 @@ public class T0016FundamentalFor {
 
     @Test
     void challenge() {
-
+        for (int i = 10; i >= 1; i--) {
+            System.out.println(i);
+        }
     }
 }
