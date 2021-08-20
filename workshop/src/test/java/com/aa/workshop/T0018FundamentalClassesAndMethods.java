@@ -30,7 +30,7 @@ public class T0018FundamentalClassesAndMethods {
     // and any others
 
     @ParameterizedTest
-    @CsvSource({""})
+    @CsvSource({"0,0"})
     void challenge(int expected, int startValue) {
     }
 

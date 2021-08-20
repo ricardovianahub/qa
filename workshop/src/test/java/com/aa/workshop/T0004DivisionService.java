@@ -18,8 +18,8 @@ public class T0004DivisionService {
 
     @Test
     void test() {
-        String response = testRestTemplate.getForObject("http://ricbox.com/division/2", String.class);
-        assertEquals("4", response);
+        String response = testRestTemplate.getForObject("http://ricbox.com/division/2/4", String.class);
+        assertEquals("2", response);
     }
 
     // Design a service called Division that will receive 2 parameters and return the result of

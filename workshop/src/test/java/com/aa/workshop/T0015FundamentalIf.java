@@ -37,10 +37,10 @@ public class T0015FundamentalIf {
         }
 
         test = "Something else";
-        if (test == null)
+        if (test == null) {
             System.out.println("it's null");
-
-        test = "Default value";
+            test = "Default value";
+        }
 
         assertEquals("Something else", test);
     }
@@ -59,7 +59,7 @@ public class T0015FundamentalIf {
 
         if (!content.equals("american")) {
             System.out.println("OA flight");
-            fail();
+            //fail();
         }
 
         System.out.println("END");

@@ -70,7 +70,7 @@ public class T0011FailOnExtendedCharacters {
     @Test
     void failIfNonAlphabeticalCharactersArePresent_FullResponse() {
         String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
-        Pattern pattern = Pattern.compile("[a-zA-Z\\[\\]{},\"]+");
+        Pattern pattern = Pattern.compile("[a-zA-Z\\[\\]{},\":]+");
         assertTrue(pattern.matcher(response).matches());
     }
 

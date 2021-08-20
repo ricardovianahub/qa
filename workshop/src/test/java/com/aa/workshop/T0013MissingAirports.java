@@ -72,7 +72,7 @@ public class T0013MissingAirports {
             }
         }
         System.out.println("Missing airports: " + result);
-        assertFalse(missedAirport);
+        assertTrue(missedAirport);
     }
 
 
