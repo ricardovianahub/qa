@@ -15,15 +15,17 @@ public class Example1 {
     }
 
     public String[] buildAnagrams(String word) {
+        // Guard statement
         if (word == null || "".equals(word)) {
             return new String[]{""};
         }
-        if ("def".equals(word)) {
-            return new String[]{"def", "dfe", "edf", "efd", "fde", "fed"};
-        }
-        if ("ab".equals(word)) {
-            return new String[]{"ab", "ba"};
-        }
+
+//        if ("def".equals(word)) {
+//            return new String[]{"def", "dfe", "edf", "efd", "fde", "fed"};
+//        }
+//        if ("ab".equals(word)) {
+//            return new String[]{"ab", "ba"};
+//        }
         return createAnagramizedList(
                 word.chars().sorted().mapToObj(c -> "" + (char) c)
                         .collect(Collectors.joining())

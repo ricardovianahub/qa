@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 
 public class EncapsulationTest {
 
+    // Reflection should only be used in tests "after", aka "characterization tests"
+    // Those are only created when you are creating tests for legacy code (code without tests)
+
     @Test
     void assertScopes() throws NoSuchFieldException, IllegalAccessException {
         Encapsulation encapsulation = new Encapsulation();
