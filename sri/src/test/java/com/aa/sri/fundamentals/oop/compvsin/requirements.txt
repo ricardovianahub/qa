@@ -1,0 +1,20 @@
+- Implement the folllowing functionality using either composition or inheritance and make sure you know why :)
+
+Classes:
+
+    Name
+        - Receive 2 parameters: first name, last name
+        - 3 methods:
+            - Abbreviation (return the first 2 letters of each name, in caps, no spaces)
+            - Last name + comma + first name
+            - First initial dot last name
+            - Just display first and last names in order with a space between name
+
+    Two other classes:
+        - Person: Name, age, address
+        - Cat: Name, Species, age
+
+
+
+
+
