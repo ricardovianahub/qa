@@ -1,4 +1,4 @@
-package com.aa.sri.fundamentals.oop.example1;
+package com.aa.sri.fundamentals.oop.anagram;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -7,9 +7,9 @@ import java.util.Arrays;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-public class Example1Test {
+public class AnagramTest {
 
-    private Example1 example1;
+    private Anagram anagram;
 
     @ParameterizedTest
     @CsvSource({
@@ -21,10 +21,10 @@ public class Example1Test {
     })
     void buildAnagramsAll(String expectedString, String argument) {
         // setup
-        example1 = new Example1(Example1.STRATEGY.ALL);
+        anagram = new Anagram(Anagram.STRATEGY.ALL);
         String[] expected = expectedString.split(",");
         // execution
-        String[] actual = example1.buildAnagrams(argument);
+        String[] actual = anagram.buildAnagrams(argument);
 
         Arrays.sort(actual);
 
