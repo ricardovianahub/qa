@@ -41,8 +41,7 @@ public class Anagram {
                             tempWord
                     )
             );
-            tempWord = tempWord.substring(tempWord.length() - 1)
-                    + tempWord.substring(0, tempWord.length() - 1);
+            tempWord = lastLetter(tempWord) + everythingExceptLastLetter(tempWord);
         }
         // def = d(0) e(1) f(2) -- f  // d ef // def dfe edf efd fde fed
         // "ab".substring(0,1) does not mean "ab", it means "a" because 1 is the first position
@@ -50,6 +49,14 @@ public class Anagram {
         // "abc".substring(1) => "bc"
 
         return result;
+    }
+
+    private String everythingExceptLastLetter(String tempWord) {
+        return tempWord.substring(0, tempWord.length() - 1);
+    }
+
+    private String lastLetter(String word) {
+        return word.substring(word.length() - 1);
     }
 
     private String anagramize(String s) {
