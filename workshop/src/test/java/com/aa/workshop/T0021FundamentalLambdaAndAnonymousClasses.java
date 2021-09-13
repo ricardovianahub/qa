@@ -11,16 +11,19 @@ public class T0021FundamentalLambdaAndAnonymousClasses {
 
     @Test
     void anonymousClass() {
-        Anonymous anonymous = new Anonymous() {
+        Anonymous anonymous1 = new Anonymous() {
             @Override
             public String tellme() {
                 return "hi";
             }
         };
 
+        Anonymous anonymous2 = () -> "hello";
+
         NotAnonymous notAnonymous = new NotAnonymous();
 
-        assertEquals("hi", anonymous.tellme());
+        assertEquals("hi", anonymous1.tellme());
+        assertEquals("hello", anonymous2.tellme());
         assertEquals("not anonymous", notAnonymous.tellme());
     }
 
