@@ -25,8 +25,10 @@ public class Anagram {
 //        }
 
         return createAnagramizedList(
-                word.chars().sorted().mapToObj(c -> "" + (char) c)
-                        .collect(Collectors.joining())
+                word.chars()                                      // "h", "e", "l", "l", "o"  --- actually 104, 65, 108, 108, 111
+                        .sorted()                                 // "e", "h", "l", "l", "o"  --- actually 65, 104, 108, 108, 111
+                        .mapToObj(c -> String.valueOf((char) c))  // "e", "h", "l", "l", "o"
+                        .collect(Collectors.joining())            // "ehllo"
         ).toArray(String[]::new);
     }
 
