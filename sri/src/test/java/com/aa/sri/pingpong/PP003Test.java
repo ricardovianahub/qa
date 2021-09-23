@@ -15,7 +15,7 @@ public class PP003Test {
     @ParameterizedTest
     @CsvSource({
             "A,N", "B,O", "C,P", "M,Z", // first 13
-            "N,A"
+            "N,A", "z,Z"
     })
     void rotate(String argument, String expected) {
         assertEquals(expected, Rot13.encode(argument));
