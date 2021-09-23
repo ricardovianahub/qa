@@ -17,7 +17,13 @@ public class PP003Test {
 
         assertEquals(expected, Rot13.encode(argument));
     }
+    @Test
+    void rotateB() {
+        String argument = "B";
+        String expected = "O";
 
+        assertEquals(expected, Rot13.encode(argument));
+    }
     @Test
     void rotateWrongCharacter() {
         assertThrows(IllegalArgumentException.class,

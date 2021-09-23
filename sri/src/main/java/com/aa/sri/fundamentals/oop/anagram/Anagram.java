@@ -24,12 +24,13 @@ public class Anagram {
 //            return new String[]{"def", "dfe", "edf", "efd", "fde", "fed"};
 //        }
 
-        return createAnagramizedList(
+        String[] strings = createAnagramizedList(
                 word.chars()                                      // "h", "e", "l", "l", "o"  --- actually 104, 65, 108, 108, 111
                         .sorted()                                 // "e", "h", "l", "l", "o"  --- actually 65, 104, 108, 108, 111
                         .mapToObj(c -> String.valueOf((char) c))  // "e", "h", "l", "l", "o"
                         .collect(Collectors.joining())            // "ehllo"
         ).toArray(String[]::new);
+        return strings;
     }
 
     private List<String> createAnagramizedList(String word) {
@@ -49,7 +50,6 @@ public class Anagram {
         // "ab".substring(0,1) does not mean "ab", it means "a" because 1 is the first position
         // NOT to be included
         // "abc".substring(1) => "bc"
-
         return result;
     }
 
