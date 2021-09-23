@@ -3,7 +3,6 @@ package com.aa.workshop;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -77,4 +76,26 @@ public class T0020FundamentalComposition1 {
     // Assign/add your animal objects to your farm object
     // Ask your farm object to "operate". Check if animals did what they do
 
+
+    @Test
+    void FarmWithTractors() {
+        Farm farm = new Farm();
+
+        Tractor kubota = new Kubota();
+        Tractor johndeere = new Johndeere();
+        Tractor yueda = new Yueda();
+
+        farm.tractors(kubota);
+        farm.tractors(johndeere);
+        farm.tractors(yueda);
+
+        List<String> resultsFromActionsFromTractors;
+        resultsFromActionsFromTractors = farm.action();
+
+        assertEquals(3, resultsFromActionsFromTractors.size());
+        assertTrue(resultsFromActionsFromTractors.contains("Kubota action"), "Kubota rotation to the right");
+        assertTrue(resultsFromActionsFromTractors.contains("Johndeere action"), "Johndeere rotates to the left");
+        assertTrue(resultsFromActionsFromTractors.contains("Yueda action"), "Yueda swivels at 360");
+    }
 }
+
