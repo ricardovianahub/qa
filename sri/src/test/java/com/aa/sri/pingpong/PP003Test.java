@@ -15,17 +15,28 @@ public class PP003Test {
     @ParameterizedTest
     @CsvSource({
             "A,N", "B,O", "C,P", "M,Z", // first 13
-            "N,A", "z,Z"
+            "N,A", "O,B", "P,C", "Z,M",
+            "ABC,NOP",
+            "BCM,OPZ"
     })
     void rotate(String argument, String expected) {
         assertEquals(expected, Rot13.encode(argument));
     }
 
-    @Test
-    void rotateWrongCharacter() {
+    @ParameterizedTest
+    @CsvSource({
+            "%", "[", "]", "\\#", "!", "{"
+    })
+    void rotateWrongCharacter(String badCharacter) {
         assertThrows(IllegalArgumentException.class,
-                () -> Rot13.encode("%")
+                () -> Rot13.encode(badCharacter)
         );
+    }
+
+    @Test
+    void getsExceptionObject() {
+        Exception actual = Rot13.example();
+        assertEquals(IllegalArgumentException.class, actual.getClass());
     }
 
 }
