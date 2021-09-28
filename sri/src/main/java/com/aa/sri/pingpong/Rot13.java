@@ -14,9 +14,9 @@ public class Rot13 {
         char arg = argument.charAt(0);
         guardEncode(arg);
         if ((char)(arg)=='Z'){
-            return String.valueOf( arg - 25);
+            return String.valueOf( (char) (arg-25));
         }
-        return String.valueOf(arg+1);
+        return String.valueOf((char)(arg+1));
 //        return String.valueOf(
 //                (char) (arg + ((arg >= 'N') ? -13 : 13))
 //        );
