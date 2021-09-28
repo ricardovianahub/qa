@@ -1,5 +1,6 @@
 package com.aa.sri.pingpong;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -12,13 +13,21 @@ public class PP004Test {
     // Implement Slide 1 encodingg - method receives one String, returns String where all
     // characters shift +1 in the alphabet, and Z goes back to A - all CAPS
     // Example: ABC = BCD; XYZ - YZA
+
+    private Slide1 slide1;
+
+    @BeforeEach
+    void setup() {
+        slide1 = new Slide1();
+    }
+
     @ParameterizedTest
     @CsvSource({
             "ABC,BCD",
             "XYZ,YZA"
     })
     void rotate(String argument, String expected) {
-        assertEquals(expected, Slide1.encode(argument));
+        assertEquals(expected, slide1.encode(argument));
     }
 
     @ParameterizedTest
@@ -27,7 +36,7 @@ public class PP004Test {
     })
     void rotateWrongCharacter(String badCharacter) {
         assertThrows(IllegalArgumentException.class,
-                () -> Slide1.encode(badCharacter)
+                () -> slide1.encode(badCharacter)
         );
     }
 
