@@ -14,15 +14,11 @@ public class PP004Test {
     // Example: ABC = BCD; XYZ - YZA
     @ParameterizedTest
     @CsvSource({
-//            "A,N", "B,O", "C,P", "M,Z", // first 13
-//            "N,A", "O,B", "P,C", "Z,M",
-//            "ABC,NOP",
-//            "BCM,OPZ"
             "ABC,BCD",
             "XYZ,YZA"
     })
     void rotate(String argument, String expected) {
-        assertEquals(expected, Rot13.encode(argument));
+        assertEquals(expected, Slide1.encode(argument));
     }
 
     @ParameterizedTest
@@ -31,14 +27,8 @@ public class PP004Test {
     })
     void rotateWrongCharacter(String badCharacter) {
         assertThrows(IllegalArgumentException.class,
-                () -> Rot13.encode(badCharacter)
+                () -> Slide1.encode(badCharacter)
         );
-    }
-
-    @Test
-    void getsExceptionObject() {
-        Exception actual = Rot13.example();
-        assertEquals(IllegalArgumentException.class, actual.getClass());
     }
 
 }

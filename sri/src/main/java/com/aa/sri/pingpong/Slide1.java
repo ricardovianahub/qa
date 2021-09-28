@@ -1,6 +1,6 @@
 package com.aa.sri.pingpong;
 
-public class Rot13 {
+public class Slide1 {
 
     public static String encode(String argument) throws IllegalArgumentException {
         StringBuilder sb = new StringBuilder();
@@ -14,7 +14,7 @@ public class Rot13 {
         char arg = argument.charAt(0);
         guardEncode(arg);
         return String.valueOf(
-                (char) (arg + ((arg >= 'N') ? -13 : 13))
+                (char) (arg+ ((arg=='Z')?-25:1))
         );
     }
 
@@ -24,7 +24,4 @@ public class Rot13 {
         }
     }
 
-    public static Exception example() {
-        return new IllegalArgumentException();
-    }
 }
