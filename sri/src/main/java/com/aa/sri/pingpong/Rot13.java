@@ -13,9 +13,13 @@ public class Rot13 {
     private static String checkEachCharacter(String argument) {
         char arg = argument.charAt(0);
         guardEncode(arg);
-        return String.valueOf(
-                (char) (arg + ((arg >= 'N') ? -13 : 13))
-        );
+        if ((char)(arg)=='Z'){
+            return String.valueOf( arg - 25);
+        }
+        return String.valueOf(arg+1);
+//        return String.valueOf(
+//                (char) (arg + ((arg >= 'N') ? -13 : 13))
+//        );
     }
 
     private static void guardEncode(char arg) {
