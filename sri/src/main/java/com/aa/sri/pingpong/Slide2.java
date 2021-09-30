@@ -7,7 +7,7 @@ public class Slide2 extends CharacterEncoder {
         char arg = argument.charAt(0);
         guardEncode(arg);
         return String.valueOf(
-                (char) (arg- ((arg=='A')?+25:1))
+                (char) (arg + ((arg == 'A') ? +25 : -1))
         );
     }
 
