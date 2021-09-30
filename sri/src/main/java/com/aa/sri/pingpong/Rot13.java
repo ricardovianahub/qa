@@ -1,14 +1,27 @@
 package com.aa.sri.pingpong;
 
+import java.util.function.Predicate;
+
 public class Rot13 extends CharacterEncoder {
 
     @Override
-    String checkEachCharacter(String argument) {
-        char arg = argument.charAt(0);
-        guardEncode(arg);
-        return String.valueOf(
-                (char) (arg + ((arg >= 'N') ? -13 : 13))
-        );
+    EncodingCondition encodingCondition() {
+        return new EncodingCondition() {
+            @Override
+            public boolean test(char arg) {
+                return (arg >= 'N');
+            }
+        };
+    }
+
+    @Override
+    int trueResult() {
+        return -13;
+    }
+
+    @Override
+    int falseResult() {
+        return 13;
     }
 
     public Exception example() {

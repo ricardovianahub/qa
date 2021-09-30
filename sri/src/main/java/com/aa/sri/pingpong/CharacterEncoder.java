@@ -10,12 +10,26 @@ public abstract class CharacterEncoder {
         return sb.toString();
     }
 
-    abstract String checkEachCharacter(String argument);
-
     public void guardEncode(char arg) {
         if (arg < 'A' || arg > 'Z') {
             throw new IllegalArgumentException();
         }
     }
+
+    protected interface EncodingCondition {
+        boolean test(char arg);
+    }
+
+    String checkEachCharacter(String argument) {
+        char arg = argument.charAt(0);
+        guardEncode(arg);
+        return String.valueOf(
+                (char) (arg + (encodingCondition().test(arg) ? trueResult() : falseResult()))
+        );
+    }
+
+    abstract EncodingCondition encodingCondition();
+    abstract int trueResult();
+    abstract int falseResult();
 
 }
