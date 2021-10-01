@@ -49,4 +49,24 @@ public class T0004DivisionService {
         assertEquals("9", testRestTemplate.getForObject("http://ricbox.com/division/9/81", String.class));
     }
 
+    @Test
+    void methodReturnTypes() {
+        Calculation calculation = new Calculation();
+        assertEquals("4.0", calculation.result(2, 8));
+        assertEquals(2000, calculation.somethingElse(123));
+        assertEquals("test", calculation.passThrough("test"));
+    }
+
+    private class Calculation {
+        String result(int first, int second) {
+            return String.valueOf((float) second / first);
+        }
+        int somethingElse(int i) {
+            return 2000;
+        }
+        String passThrough(String param) {
+            return param;
+        }
+    }
+
 }
