@@ -1,6 +1,7 @@
 package com.aa.sri.pingpong;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,8 +20,32 @@ public class PP006Test {
     @Test
     void createKeyAlan() {
         KeyEncoder keyEncoder = new KeyEncoder();
-        String actual = keyEncoder.createKey("Alan", "Smith", "DFW");
-        assertEquals("Alan-Smith-DFW", actual);
+        String actual = keyEncoder.createKey("Alan", "Smith", "ORD");
+        assertEquals("Alan-Smith-ORD", actual);
+    }
+
+    @Test
+    void createKeyJames() {
+        KeyEncoder keyEncoder = new KeyEncoder();
+        String actual = keyEncoder.createKey("James", "Thomas", "DFW");
+        assertEquals("James-Thomas-DFW", actual);
+    }
+
+    @Test
+    void nullParametersThrowException() {
+        KeyEncoder keyEncoder = new KeyEncoder();
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> keyEncoder.createKey("Joe", null, "DFW")
+        );
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> keyEncoder.createKey(null, "Smith", "DFW")
+        );
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> keyEncoder.createKey("Joe", "Smith", null)
+        );
     }
 
 
