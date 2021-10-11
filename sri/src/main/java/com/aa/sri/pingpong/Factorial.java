@@ -1,7 +1,7 @@
 package com.aa.sri.pingpong;
 
 public class Factorial {
-    public static int of_original(int number) {
+  /*  public static int of_original(int number) {
         if (number == 1) {
             return 1;
         }
@@ -19,11 +19,13 @@ public class Factorial {
             result = result * i;
         }
         return result;
-    }
+    }*/
 
-    public static int of(int number)
-    {
-        number = of(number-1);
+    public static int of(int number) {
+        if (number == 0) {
+            return 1;
+        }
+        number = number*of(number - 1);
         return number;
     }
 
