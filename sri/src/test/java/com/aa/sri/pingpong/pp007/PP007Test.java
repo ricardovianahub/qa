@@ -29,6 +29,9 @@ public class PP007Test {
         assertThrows(IllegalArgumentException.class,
                 () -> letterHeader.createHeader("Bill", null)
         );
+        assertThrows(IllegalArgumentException.class,
+                () -> letterHeader.createHeader(null, "Washington")
+        );
     }
 
     private interface MyInterface {
