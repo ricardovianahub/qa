@@ -20,6 +20,10 @@ public class Anagram {
             return new String[]{""};
         }
 
+        if (word.length() > 2) {
+            return longerAnagram(word);
+        }
+
 //        if ("def".equals(word)) {
 //            return new String[]{"def", "dfe", "edf", "efd", "fde", "fed"};
 //        }
@@ -31,6 +35,31 @@ public class Anagram {
                         .collect(Collectors.joining())            // "ehllo"
         ).toArray(String[]::new);
         return strings;
+    }
+
+    private String[] longerAnagram(String word) {
+        List<StringBuilder> results = new ArrayList<>();
+        for (byte b : word.getBytes()) {
+            results.add(new StringBuilder("" + (char) b));
+            results.add(new StringBuilder("" + (char) b));
+        }
+        for (byte b : word.getBytes()) {
+            for (StringBuilder result : results) {
+                if (!result.toString().contains("" + (char) b)) {
+                    result.append("" + (char) b);
+                }
+            }
+        }
+        for (byte b : word.getBytes()) {
+            for (StringBuilder result : results) {
+                if (!result.toString().contains("" + (char) b)) {
+                    result.append("" + (char) b);
+                }
+            }
+        }
+        List<String> output = new ArrayList<>();
+        results.forEach(stringBuilder -> output.add(stringBuilder.toString()));
+        return output.toArray(new String[]{});
     }
 
     private List<String> createAnagramizedList(String word) {
@@ -71,3 +100,12 @@ public class Anagram {
 // 1 - Create a solution which is incomplete, then keep changing it until it's correct
 //  def - (d)(ef) --- efd - (e)(fd) -- fde (f)(de)
 // 2 - Make it right from the beginning (could be more complex to code)
+
+
+// Create a copy of the letters = "def"
+// Run a loop for the first letter of the result. Populate it with all 3 possible letters  of the input
+// Run a loop for the second letter of the result. Populate it with all letters in the input that are not contained in the result
+// Run a loop for the third letter of the result. Populate it with all letters in the input that are not contained in the result
+
+// Input: DEF --- "working are" E - Output: D
+//
