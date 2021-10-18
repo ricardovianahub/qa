@@ -50,5 +50,17 @@ public class T0001MultiplicationServiceRequirementChange {
                 testRestTemplate.getForObject("http://ricbox.com/multiplication/" + parameter, String.class),
                 "No match"
         );
+
+    }
+    @ParameterizedTest
+    @CsvSource({"4,2", "6,3", "20,10", "702,351"})
+    void testMultiply2(String expected, String parameter) {
+        assertNotNull(parameter);
+        assertNotNull(expected);
+        assertEquals(expected,
+                testRestTemplate.getForObject("http://ricbox.com/multiplication/" + parameter, String.class),
+                "No match"
+        );
     }
 }
+

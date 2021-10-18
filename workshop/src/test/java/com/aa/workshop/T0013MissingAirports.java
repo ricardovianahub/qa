@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -25,14 +24,14 @@ public class T0013MissingAirports {
     @Autowired
     private TestRestTemplate testRestTemplate;
 
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private ObjectMapper om = new ObjectMapper();
 
     // Example: Verify that each residence airport is present in the /airport service
 
     @Test
     void verifyAirportsOfResidence() throws JsonProcessingException {
         String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
-        List<Map> passengers = objectMapper.readValue(response, List.class);
+        List<Map> passengers = om.readValue(response  , List.class);
         for (Map passenger : passengers) {
             assertFalse(
                     testRestTemplate.getForObject("http://ricbox.com/airport/" + passenger.get("residence"), String.class)
@@ -50,7 +49,7 @@ public class T0013MissingAirports {
     @Test
     void verifyMissingAirportsOfResidence() throws JsonProcessingException {
         String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
-        List<Map> passengers = objectMapper.readValue(response, List.class);
+        List<Map> passengers = om.readValue(response, List.class);
         Boolean missedAirport = false;
         String result = "";
         for (Map passenger : passengers) {
