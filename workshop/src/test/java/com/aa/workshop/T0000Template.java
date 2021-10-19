@@ -22,4 +22,9 @@ public class T0000Template {
         assertEquals("4", response);
     }
 
+    @Test
+    void test2() {
+        String reply = testRestTemplate.getForObject("http://ricbox.com/multiplication/2", String.class);
+        assertEquals("4", reply);
+    }
 }

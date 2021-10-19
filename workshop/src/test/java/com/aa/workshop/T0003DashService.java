@@ -49,10 +49,7 @@ public class T0003DashService {
     @ParameterizedTest
     @CsvSource({"hello-world-hello,hello,world,hello", "1-2-3,1,2,3", "-----,-,-,-", "I-did-it,I,did,it"})
     void response(String expected, String one, String two, String three) {
-        String response = testRestTemplate.getForObject(
-                "http://ricbox.com/dash/" + one + "/" + two + "/" + three,
-                String.class
-        );
+        String response = testRestTemplate.getForObject("http://ricbox.com/dash/" + one + "/" + two + "/" + three, String.class);
         assertEquals(expected, response);
     }
 

@@ -30,7 +30,7 @@ public class T0016FundamentalFor {
         for (int i = 0; i < 5; i+=2) { // i = i + 2;
             System.out.println(i);
         }
-        for (int i = 0; i < 5; i+=3) { // i = i + 3;
+        for (int i = 0; i < 5; i+=3)     { // i = i + 3;
             System.out.println(i);
         }
     }
