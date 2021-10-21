@@ -1,22 +1,28 @@
 plugins {
-	id 'org.springframework.boot' version '2.5.3'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
+    id 'org.springframework.boot' version '2.5.3'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id "nebula.lint" version "17.2.3"
 }
+
 
 group = 'com.aa'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
+gradleLint {
+    rules = ['unused-dependency']
+}
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
 }
 
 test {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
