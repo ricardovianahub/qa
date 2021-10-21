@@ -54,4 +54,17 @@ public class T0007PassengersServiceSearchFieldValue {
         }
         assertTrue(foundIt);
     }
+
+    @Test
+    void testJulian2() throws JsonProcessingException {
+        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        List<Map> lines = objectMapper.readValue(response, List.class);
+        Boolean foundIt = false;
+        for (Map map : lines) {
+            if (map.get("lastName").equals("Doe")) {
+                foundIt = true;
+            }
+        }
+        assertTrue(foundIt);
+    }
 }

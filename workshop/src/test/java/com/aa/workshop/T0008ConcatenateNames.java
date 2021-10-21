@@ -73,4 +73,19 @@ public class T0008ConcatenateNames {
         }
         assertEquals("JamesJimesJomesJumesJymes", result);
     }
+
+    @Test
+    void concatenateFirstNames2() throws JsonProcessingException {
+        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        List<Map> lines = objectMapper.readValue(response, List.class);
+        String result = "";
+        for (Map map : lines) {
+            if (map.get("origination").equals("DFW") && map.get("residence").equals("DAL")) {
+                result = result + map.get("firstName") + map.get("residence");
+            }
+        }
+        assertEquals("JamesDALJimesDALJomesDALJumesDALJymesDAL", result);
+        System.out.print(result);
+    }
 }
+
