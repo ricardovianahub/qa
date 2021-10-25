@@ -21,9 +21,9 @@ Roman numeral values from the range 1-3999
 			- Convert to numerals that can be combined with a numeral of higher value to mean a higher value:
 				- VI
 				- XI, XV
-				- LI, LV, LX
-				- CI, CV, CX, CL
-				- DI, DV, DX, DL, DC
+				- LI, LV, LX // LXX, LXXX
+				- CI, CV, CX, CL // CXX
+				- DI, DV, DX, DL, DC // DII
 				- MI, MV, MX, ML, MC, MD
 		- User story 4:
 			- Convert to numerals that can be combined with a numeral of immediate higher value to mean a lower value:
