@@ -87,5 +87,16 @@ public class T0008ConcatenateNames {
         assertEquals("JamesDALJimesDALJomesDALJumesDALJymesDAL", result);
         System.out.print(result);
     }
-}
+
+    //Read passenger service. Count how many passengers have three or more aeiou in their first names
+    @Test
+    void threeOrMoreVowlesInFirstName() throws JsonProcessingException {
+        String payload = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        List<Map> passengers = objectMapper.readValue(payload, List.class);
+        int pax = 0;
+        for (Map map : passengers) {
+        String firstName = String.valueOf(map.get("firstName"));
+        }
+    }}
+
 

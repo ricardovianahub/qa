@@ -1,6 +1,7 @@
 package com.aa.workshop;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import java.util.Map;
@@ -55,21 +56,22 @@ public class T0006PassengersService {
 
     @Test
     void exampleOfArray() {
-        int[] even = new int[] {0,2,4,6,8};
-                             // 0 1 2 3 4
+        int[] even = new int[]{0, 2, 4, 6, 8};
+        // 0 1 2 3 4
         for (int i = 0; i < even.length; i++) {
             System.out.print("in the array even, the index ");
             System.out.print(i);
             System.out.print(" contains ");
-            System.out.print( even[i] );
+            System.out.print(even[i]);
 
             System.out.println();
         }
     }
 
+
     @Test
     void exampleOfRemainder() {
-        for (int i = 1; i <= 15; i+=2) {
+        for (int i = 1; i <= 15; i += 2) {
             System.out.println(i % 10); // % means ' remainder of '
         }
     }
@@ -131,5 +133,6 @@ public class T0006PassengersService {
             this.residence = residence;
         }
     }
-
 }
+
+

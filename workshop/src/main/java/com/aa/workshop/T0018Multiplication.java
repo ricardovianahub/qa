@@ -5,7 +5,7 @@ public class T0018Multiplication {
         return number * 2;
     }
 
-    public int challenge(int startValue) {
-        return startValue * 3;
+    public int tripleValue(int startValue) {
+        return startValue *3;
     }
 }
