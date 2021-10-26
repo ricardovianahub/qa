@@ -3,9 +3,11 @@ package com.aa.workshop;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,6 +88,50 @@ public class T0008ConcatenateNames {
         }
         assertEquals("JamesDALJimesDALJomesDALJumesDALJymesDAL", result);
         System.out.print(result);
+
+    }
+
+    //Read passenger service. Count how many passengers have three or more aeiou in their first names
+    @Test
+    void threeOrMoreVowlesInFirstName() throws JsonProcessingException {
+        String payload = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        List<Map> passengers = objectMapper.readValue(payload, List.class);
+        int paxCount = 0;
+        int counter = 0;
+        List<String> vowels = new ArrayList<>();
+        vowels.add("a");
+        vowels.add("e");
+        vowels.add("i");
+        vowels.add("o");
+        vowels.add("u");
+        for (Map map : passengers) {
+            String firstName = String.valueOf(map.get("firstName"));
+            String[] firstNameCharArray = new String[firstName.length()];
+            for (int i = 0; i <= firstName.length() - 1; i++) {
+                firstNameCharArray[i] = firstName.substring(i, i + 1);
+                System.out.println("Char Array is: " + firstNameCharArray[i]);
+            }
+
+            for (String vowel : vowels) {
+                for (int i = 0; i <= firstNameCharArray.length - 1; i++) {
+                    if (firstNameCharArray[i].equalsIgnoreCase(vowel)) {
+                        counter++;
+                    }
+                }
+
+            }
+            if (counter >= 3) {
+                paxCount++;
+            }
+            System.out.println("Paxcount in loop" + paxCount);
+            counter = 0;
+        }
+
+        System.out.println("Counter is " + paxCount);
     }
 }
 
+
+//firstName.contains(vowel[0]);
+//String[] vowel = new String[]{"a","e","i","o","u"};
+//
