@@ -3,13 +3,13 @@ package com.aa.sri.pingpong.pp007;
 public class LetterHeader {
     public String createHeader(String firstName, String lastName) {
         guardCreateHeader(firstName, lastName);
-        if("Strange".equals(lastName)){
-            return "Dear Mr. Bill Strange (B.S.)";
-        }
-        if ("Bill".equals(firstName)) {
-            return "Dear Mr. Bill Folds (B.F.)";
-        }
-        return "Dear Mr. "+firstName+" "+lastName+" (D.W.)";
+//        return "Dear Mr. " + firstName + " " + lastName + " ("
+//                + firstName.substring(0, 1) + "."
+//                + lastName.substring(0, 1) + "."
+//                + ")";
+        return String.format("Dear Mr. %s %s (%s.%s.)",
+                firstName, lastName,
+                firstName.charAt(0), lastName.charAt(0));
     }
 
     private void guardCreateHeader(String firstName, String lastName) {

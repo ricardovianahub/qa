@@ -1,0 +1,32 @@
+Roman numeral values from the range 1-3999
+
+- Requirements:
+		- User story 1:
+			- Convert the following basic numbers:
+				- I = 1
+				- V = 5
+				- X = 10
+				- L = 50
+				- C = 100
+				- D = 500
+				- M = 1000
+		- User story 2:
+			- Convert to numerals that can be repeated up to 3 times:
+				- I, II, III
+				- X, XX, XXX
+				- C, CC, CCC
+				- M, MM, MMM
+			- Please notice that numerals based on 5 cannot be repeated. For example, these are incorrect: VVV, LLL, or DDD
+		- User story 3:
+			- Convert to numerals that can be combined with a numeral of higher value to mean a higher value:
+				- VI
+				- XI, XV
+				- LI, LV, LX // LXX, LXXX
+				- CI, CV, CX, CL // CXX
+				- DI, DV, DX, DL, DC // DII
+				- MI, MV, MX, ML, MC, MD
+		- User story 4:
+			- Convert to numerals that can be combined with a numeral of immediate higher value to mean a lower value:
+				- IV, IX
+				- XL, XC
+				- CD, CM
