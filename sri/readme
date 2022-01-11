@@ -1,3 +1,18 @@
 2022 Topics
 
-1 - 
+Mon/Fri - Find specific questions
+
+1 - Anagram exercise
+2 - Snappy?
+3 - Mockito
+  3.1 - Principles of mocking/faking
+    3.1.1 - For unit tests, everything else needs to be assumed to be working, except for the class you are testing
+  3.2 - Examples
+4 - Autowire (Spring)
+  4.1 - Spring basics
+  4.2 - Injecting beans (Composition)
+5 - Controller
+  5.1 - Design Patterns
+  5.4 - Examples (Spring)
+  5.2 - Some basic functionalities of module communication
+  5.3 - Why we use controllers and their specific purpose
