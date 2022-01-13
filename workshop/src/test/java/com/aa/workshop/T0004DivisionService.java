@@ -18,7 +18,7 @@ public class T0004DivisionService {
 
     @Test
     void test() {
-        String response = testRestTemplate.getForObject("http://ricbox.com/division/2/4", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/division/2/4", String.class);
         assertEquals("2", response);
     }
 
@@ -28,7 +28,7 @@ public class T0004DivisionService {
     // You create the results that will be used in a parameterized test to ensure that this new service
     // Is doing what's expected
     //
-    // http://ricbox.com/division/ - 3 parameters - 1 expected 2 factors
+    // http://server1.onlinebunker.com/division/ - 3 parameters - 1 expected 2 factors
     //
     // Directions:
     // X 4 scenarios
@@ -43,10 +43,10 @@ public class T0004DivisionService {
 
     @Test
     void division() {
-        assertEquals("2", testRestTemplate.getForObject("http://ricbox.com/division/4/8", String.class));
-        assertEquals("5", testRestTemplate.getForObject("http://ricbox.com/division/3/15", String.class));
-        assertEquals("3", testRestTemplate.getForObject("http://ricbox.com/division/10/30", String.class));
-        assertEquals("9", testRestTemplate.getForObject("http://ricbox.com/division/9/81", String.class));
+        assertEquals("2", testRestTemplate.getForObject("http://server1.onlinebunker.com/division/4/8", String.class));
+        assertEquals("5", testRestTemplate.getForObject("http://server1.onlinebunker.com/division/3/15", String.class));
+        assertEquals("3", testRestTemplate.getForObject("http://server1.onlinebunker.com/division/10/30", String.class));
+        assertEquals("9", testRestTemplate.getForObject("http://server1.onlinebunker.com/division/9/81", String.class));
     }
 
     @Test

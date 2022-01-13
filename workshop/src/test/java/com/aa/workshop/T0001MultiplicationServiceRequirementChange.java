@@ -19,22 +19,22 @@ public class T0001MultiplicationServiceRequirementChange {
     @Autowired
     private TestRestTemplate testRestTemplate;
 
-    // Call http://ricbox.com/multiplication service with "2" and expect "4" as a response
+    // Call http://server1.onlinebunker.com/multiplication service with "2" and expect "4" as a response
 
     @Test
     void test2() {
-        String response = testRestTemplate.getForObject("http://ricbox.com/multiplication/2", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/multiplication/2", String.class);
         assertEquals("4", response);
     }
 
-    // Call http://ricbox.com/multiplication service with "3" and expect "6" as a response
+    // Call http://server1.onlinebunker.com/multiplication service with "3" and expect "6" as a response
     @Test
     void test3() {
-        String response = testRestTemplate.getForObject("http://ricbox.com/multiplication/3", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/multiplication/3", String.class);
         assertEquals("6", response);
     }
 
-    // Call http://ricbox.com/multiplication and expect the following:
+    // Call http://server1.onlinebunker.com/multiplication and expect the following:
     // Sent  -   Received
     //   2           4
     //   3           6
@@ -47,7 +47,7 @@ public class T0001MultiplicationServiceRequirementChange {
         assertNotNull(parameter);
         assertNotNull(expected);
         assertEquals(expected,
-                testRestTemplate.getForObject("http://ricbox.com/multiplication/" + parameter, String.class),
+                testRestTemplate.getForObject("http://server1.onlinebunker.com/multiplication/" + parameter, String.class),
                 "No match"
         );
 
@@ -58,7 +58,7 @@ public class T0001MultiplicationServiceRequirementChange {
         assertNotNull(parameter);
         assertNotNull(expected);
         assertEquals(expected,
-                testRestTemplate.getForObject("http://ricbox.com/multiplication/" + parameter, String.class),
+                testRestTemplate.getForObject("http://server1.onlinebunker.com/multiplication/" + parameter, String.class),
                 "No match"
         );
     }

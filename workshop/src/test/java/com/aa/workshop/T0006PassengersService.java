@@ -28,7 +28,7 @@ public class T0006PassengersService {
 
     @Test
     void test() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> lines = objectMapper.readValue(response, List.class);
         assertEquals(15, lines.size());
     }
@@ -37,7 +37,7 @@ public class T0006PassengersService {
 
     @Test
     void oddRowsOfPassengersConcatenateOriginationAirport() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> passengers = objectMapper.readValue(response, List.class);
         int[] validNumbers = new int[]{1, 3, 5, 7, 9};
         String result = "";
@@ -80,7 +80,7 @@ public class T0006PassengersService {
 
 //    @Test
 //    void testWithPassengerObject() throws JsonProcessingException {
-//        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+//        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
 //        List<Passenger> lines = objectMapper.readValue(response, List.class);
 //        System.out.println("Passenger Object example: " + lines.get(0).getFirstName());
 //        assertEquals(15, lines.size());
@@ -88,7 +88,7 @@ public class T0006PassengersService {
 
     @Test
     void test2() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> lines = objectMapper.readValue(response, List.class);
         assertEquals(15, lines.size());
     }

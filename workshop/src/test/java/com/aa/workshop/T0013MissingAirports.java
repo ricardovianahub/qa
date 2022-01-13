@@ -30,11 +30,11 @@ public class T0013MissingAirports {
 
     @Test
     void verifyAirportsOfResidence() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> passengers = om.readValue(response  , List.class);
         for (Map passenger : passengers) {
             assertFalse(
-                    testRestTemplate.getForObject("http://ricbox.com/airport/" + passenger.get("residence"), String.class)
+                    testRestTemplate.getForObject("http://server1.onlinebunker.com/airport/" + passenger.get("residence"), String.class)
                             .contains("null")
             );
         }
@@ -48,12 +48,12 @@ public class T0013MissingAirports {
 
     @Test
     void verifyMissingAirportsOfResidence() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> passengers = om.readValue(response, List.class);
         Boolean missedAirport = false;
         String result = "";
         for (Map passenger : passengers) {
-            if ((testRestTemplate.getForObject("http://ricbox.com/airport/" + passenger.get("residence"), String.class)
+            if ((testRestTemplate.getForObject("http://server1.onlinebunker.com/airport/" + passenger.get("residence"), String.class)
                     .contains("null"))) {
                 missedAirport = true;
                 if (!result.equals("")) {
@@ -61,7 +61,7 @@ public class T0013MissingAirports {
                 }
                 result = result + passenger.get("residence");
             }
-            if (testRestTemplate.getForObject("http://ricbox.com/airportmissing/" + passenger.get("residence"), String.class)
+            if (testRestTemplate.getForObject("http://server1.onlinebunker.com/airportmissing/" + passenger.get("residence"), String.class)
                     .contains("null")) {
                 missedAirport = true;
                 if (!result.equals("")) {

@@ -31,17 +31,17 @@ public class T0011FailOnExtendedCharacters {
 
     @Test
     void failIfNonAlphabeticalCharactersArePresent_BasedOnResponse() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> lines = objectMapper.readValue(response, List.class);
         for (Map map : lines) {
             String alpha;
-            alpha = testRestTemplate.getForObject("http://ricbox.com/alpha/" + map.get("firstName"), String.class);
+            alpha = testRestTemplate.getForObject("http://server1.onlinebunker.com/alpha/" + map.get("firstName"), String.class);
             assertEquals("true", alpha);
-            alpha = testRestTemplate.getForObject("http://ricbox.com/alpha/" + map.get("secondName"), String.class);
+            alpha = testRestTemplate.getForObject("http://server1.onlinebunker.com/alpha/" + map.get("secondName"), String.class);
             assertEquals("true", alpha);
-            alpha = testRestTemplate.getForObject("http://ricbox.com/alpha/" + map.get("origination"), String.class);
+            alpha = testRestTemplate.getForObject("http://server1.onlinebunker.com/alpha/" + map.get("origination"), String.class);
             assertEquals("true", alpha);
-            alpha = testRestTemplate.getForObject("http://ricbox.com/alpha/" + map.get("residence"), String.class);
+            alpha = testRestTemplate.getForObject("http://server1.onlinebunker.com/alpha/" + map.get("residence"), String.class);
             assertEquals("true", alpha);
         }
     }
@@ -56,7 +56,7 @@ public class T0011FailOnExtendedCharacters {
 
     @Test
     void failIfNonAlphabeticalCharactersArePresent_RegularExpression() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> lines = objectMapper.readValue(response, List.class);
         Pattern pattern = Pattern.compile("[a-zA-Z]+");
         for (Map map : lines) {
@@ -69,14 +69,14 @@ public class T0011FailOnExtendedCharacters {
 
     @Test
     void failIfNonAlphabeticalCharactersArePresent_FullResponse() {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         Pattern pattern = Pattern.compile("[a-zA-Z\\[\\]{},\":]+");
         assertTrue(pattern.matcher(response).matches());
     }
 
     @Test
     void failIfNonAlphabeticalCharactersArePresent_Replace() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         String filteredResponse = response
                 .replace('"', ' ')
                 .replace(':', ' ')
