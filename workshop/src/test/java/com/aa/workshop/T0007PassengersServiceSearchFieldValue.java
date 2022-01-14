@@ -29,7 +29,7 @@ public class T0007PassengersServiceSearchFieldValue {
 
     @Test
     void testYYZ() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> lines = objectMapper.readValue(response, List.class);
         Boolean foundIt = false;
         for (Map map : lines) {
@@ -44,7 +44,7 @@ public class T0007PassengersServiceSearchFieldValue {
 
     @Test
     void testJulian() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> lines = objectMapper.readValue(response, List.class);
         Boolean foundIt = false;
         for (Map map : lines) {
@@ -57,7 +57,7 @@ public class T0007PassengersServiceSearchFieldValue {
 
     @Test
     void testJulian2() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> lines = objectMapper.readValue(response, List.class);
         Boolean foundIt = false;
         for (Map map : lines) {

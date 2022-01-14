@@ -29,7 +29,7 @@ public class T0012AssertNotNull {
 
     @Test
     void test() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> maps = objectMapper.readValue(response, List.class);
         for (Map map : maps) {
             assertNotNull(map.get("firstName"));
@@ -56,7 +56,7 @@ public class T0012AssertNotNull {
 
     @Test
     void ensureNoRecordsHaveFieldThirdName() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> maps = objectMapper.readValue(response, List.class);
         for (Map map : maps) {
             assertNull(map.get("thirdName"));

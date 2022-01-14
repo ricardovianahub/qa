@@ -29,7 +29,7 @@ public class T0008ConcatenateNames {
 
     @Test
     void testJulian() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> lines = objectMapper.readValue(response, List.class);
         Boolean foundIt = false;
         for (Map map : lines) {
@@ -65,7 +65,7 @@ public class T0008ConcatenateNames {
 
     @Test
     void concatenateFirstNames() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> lines = objectMapper.readValue(response, List.class);
         String result = "";
         for (Map map : lines) {
@@ -78,7 +78,7 @@ public class T0008ConcatenateNames {
 
     @Test
     void concatenateFirstNames2() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> lines = objectMapper.readValue(response, List.class);
         String result = "";
         for (Map map : lines) {
@@ -94,7 +94,7 @@ public class T0008ConcatenateNames {
     //Read passenger service. Count how many passengers have three or more aeiou in their first names
     @Test
     void threeOrMoreVowlesInFirstName() throws JsonProcessingException {
-        String payload = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String payload = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> passengers = objectMapper.readValue(payload, List.class);
         int paxCount = 0;
         int counter = 0;
