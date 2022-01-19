@@ -26,5 +26,6 @@ public class T0000Template {
     void test2() {
         String reply = testRestTemplate.getForObject("http://server1.onlinebunker.com/multiplication/2", String.class);
         assertEquals("4", reply);
+
     }
 }
