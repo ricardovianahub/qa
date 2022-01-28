@@ -85,9 +85,9 @@ public class T0020FundamentalComposition1 {
         Tractor johndeere = new Johndeere();
         Tractor yueda = new Yueda();
 
-        farm.tractors(kubota);
-        farm.tractors(johndeere);
-        farm.tractors(yueda);
+        farm.tractor(kubota);
+        farm.tractor(johndeere);
+        farm.tractor(yueda);
 
         List<String> resultsFromActionsFromTractors;
         resultsFromActionsFromTractors = farm.action();

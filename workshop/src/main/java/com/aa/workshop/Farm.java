@@ -16,7 +16,4 @@ public class Farm {
         }
         return result;
     }
-
-    public void tractors(Tractor kubota) {
-    }
 }

@@ -31,7 +31,7 @@ public class T0009FilterList {
 
     @Test
     void filterList1() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> lines = objectMapper.readValue(response, List.class);
         List<Map> output = new ArrayList<>();
         for (Map map : lines) {
@@ -59,7 +59,7 @@ public class T0009FilterList {
 
     @Test
     void filterList2() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> lines = objectMapper.readValue(response, List.class);
         List<Map> output = new ArrayList<>();
         for (Map map : lines) {
@@ -67,7 +67,7 @@ public class T0009FilterList {
                 output.add(map);
             }
         }
-        assertEquals(11,output.size());
+        assertEquals(5,output.size());
     }
 
 }

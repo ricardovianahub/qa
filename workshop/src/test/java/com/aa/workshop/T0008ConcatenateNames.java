@@ -132,17 +132,11 @@ public class T0008ConcatenateNames {
 
     //Read passenger service. Count how many passengers have three or more aeiou in their first names
     @Test
-    void threeOrMoreVowlesInFirstName() throws JsonProcessingException {
-        String payload = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+    void threeOrMoreVowlesInFirstNameDraft() throws JsonProcessingException {
+        String payload = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> passengers = objectMapper.readValue(payload, List.class);
         int pax = 0;
         for (Map map : passengers) {
         String firstName = String.valueOf(map.get("firstName"));
         }
     }}
-
-
-
-//firstName.contains(vowel[0]);
-//String[] vowel = new String[]{"a","e","i","o","u"};
-//
