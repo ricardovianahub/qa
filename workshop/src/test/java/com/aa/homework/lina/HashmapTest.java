@@ -68,6 +68,9 @@ public class HashmapTest {
             employeeMap.put(employee.getId(), employee);
         }
 
+        // Maps have unique keys
+        // Different value requires different key
+        // One key can only correspond to one value
         printEmployeeName(employeeMap.get(403999));
     }
 
