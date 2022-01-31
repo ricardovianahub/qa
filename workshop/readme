@@ -17,6 +17,7 @@
   4.2 - Find out if the service you're going to use is read-only (idempotent)
   4.3 - Become familiar with it in Postman
   4.4 - Try to implement
+    4.4.1 - Get the certificate from the team
 5 - Create a test for AVP
   Homework
   5.1 - Create a requirement
