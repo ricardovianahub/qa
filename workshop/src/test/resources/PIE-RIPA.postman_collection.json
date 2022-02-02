@@ -1,0 +1,111 @@
+{
+	"info": {
+		"_postman_id": "64894623-3b08-44b8-a3ed-028742e702d8",
+		"name": "PIE/RIPA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "qa pie/ripa trigger",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"airlineCode\": \"AA\",\n  \"targetEnv\": \"QA1\",\n  \"cabinClassCapacityList\": [\n    {\n      \"aircraftCapacity\":216,\n      \"authorizedLevel\":216,\n      \"cabinClass\": \"COACH\",\n      \"seatsSold\": 226\n    }\n  ],\n  \"departureDateTime\": \"2019-01-05 23:40:00\",\n  \"destination\": \"DFW\",\n  \"flightNumber\": \"51\",\n  \"flightOriginDate\": \"2019-01-05\",\n  \"origin\": \"LHR\",\n  \"triggerType\": \"MANUAL\"\n}"
+				},
+				"url": {
+					"raw": "https://aacloud.qa.esoa.qcorpaa.aa.com/api/deniedboardingaccomodation/v1/",
+					"protocol": "https",
+					"host": [
+						"aacloud",
+						"qa",
+						"esoa",
+						"qcorpaa",
+						"aa",
+						"com"
+					],
+					"path": [
+						"api",
+						"deniedboardingaccomodation",
+						"v1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "stage pie/ripa trigger Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"airlineCode\": \"AA\",\n  \"targetEnv\": \"STAGE\",\n  \"cabinClassCapacityList\": [\n    {\n      \"aircraftCapacity\":114,\n      \"authorizedLevel\":114,\n      \"cabinClass\": \"COACH\",\n      \"seatsSold\": 124\n    }\n  ],\n  \"departureDateTime\": \"2018-10-21 22:00:00\",\n  \"destination\": \"LAX\",\n  \"flightNumber\": \"286\",\n  \"flightOriginDate\": \"2018-10-21\",\n  \"origin\": \"LIH\",\n  \"triggerType\": \"MANUAL\"\n}"
+				},
+				"url": {
+					"raw": "https://aacloud.stage.esoa.aa.com/api/deniedboardingaccomodation/v1/",
+					"protocol": "https",
+					"host": [
+						"aacloud",
+						"stage",
+						"esoa",
+						"aa",
+						"com"
+					],
+					"path": [
+						"api",
+						"deniedboardingaccomodation",
+						"v1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "prod pie/ripa trigger",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"airlineCode\": \"AA\",\n  \"targetEnv\": \"PROD\",\n  \"cabinClassCapacityList\": [\n    {\n      \"aircraftCapacity\":114,\n      \"authorizedLevel\":114,\n      \"cabinClass\": \"COACH\",\n      \"seatsSold\": 124\n    }\n  ],\n  \"departureDateTime\": \"2018-10-21 22:00:00\",\n  \"destination\": \"LAX\",\n  \"flightNumber\": \"286\",\n  \"flightOriginDate\": \"2018-10-21\",\n  \"origin\": \"LIH\",\n  \"triggerType\": \"MANUAL\"\n}"
+				},
+				"url": {
+					"raw": "https://aacloud.esoa.aa.com/api/deniedboardingaccomodation/v1/",
+					"protocol": "https",
+					"host": [
+						"aacloud",
+						"esoa",
+						"aa",
+						"com"
+					],
+					"path": [
+						"api",
+						"deniedboardingaccomodation",
+						"v1",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
