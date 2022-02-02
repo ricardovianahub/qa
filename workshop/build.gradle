@@ -19,6 +19,7 @@ dependencies {
     implementation 'org.junit.jupiter:junit-jupiter:5.7.+'
     testImplementation(
 			'org.springframework.boot:spring-boot-starter-test',
+			'org.apache.httpcomponents:httpclient:4.5.13',
 			'org.junit.jupiter:junit-jupiter-api:5.7.+',
 			'org.hamcrest:hamcrest-library:2.1',
 			'org.apache.commons:commons-lang3:3.4'

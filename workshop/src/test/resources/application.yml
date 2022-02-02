@@ -1,0 +1,12 @@
+server:
+  port: 443
+  ssl:
+    enabled: true
+    key-store: classpath:/S1012366.p12
+    key-store-type: PKCS12
+    protocol: TLS
+    enabled-protocols: TLSv1.2
+    key-password: qaworkshop
+    key-store-password: qaworkshop
+example: This is an example
+
