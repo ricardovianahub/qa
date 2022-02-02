@@ -1,12 +1,7 @@
 package com.aa.workshop;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,20 +9,25 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = WorkshopApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class T0009FilteredList {
+public class T0009FilterList {
 
     @Autowired
     private TestRestTemplate testRestTemplate;
 
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
-    // Filter the list received from the /passengers service to contain only passengers whose residence is DAL
-    // That new list should contain 11 rows
+
+//Filter the list that received from the /passengers service to contain onl passengers whose residence is only DAL
+//That new list should contain 11 row
 
     @Test
     void filterList1() throws JsonProcessingException {
@@ -42,20 +42,20 @@ public class T0009FilteredList {
         assertEquals(11, output.size());
     }
 
-    @Test
-    void orAndExample() {
-        // AND
-        assertTrue( (1 < 2) && (3 < 4) );
 
-        // OR
-        assertTrue( (1 > 2) || (3 < 4) );
+    @Test
+    void andOrExample() {
+        //and
+        assertTrue((1 < 2) && (3 < 4));
+
+        //or
+        assertTrue((1 > 2) || (3 < 4));
+
     }
 
-    // Challenge
-    //
-    // Filter the list received from the /passengers service to contain only passengers whose residence is DAL
-    // AND whose origination is DFW
-    //
+
+    //Filter the list that received from the /passengers service to contain onl passengers whose residence is only DAL
+    //and whose origination is DFW
 
     @Test
     void filterList2() throws JsonProcessingException {
@@ -63,11 +63,20 @@ public class T0009FilteredList {
         List<Map> lines = objectMapper.readValue(response, List.class);
         List<Map> output = new ArrayList<>();
         for (Map map : lines) {
-            if (map.get("residence").equals("DAL") && map.get("origination").equals("DFW")) {
+            if ( map.get("residence").equals("DAL") && map.get("origination").equals("DFW"))  {
                 output.add(map);
             }
         }
-        assertEquals(5, output.size());
+        assertEquals(5,output.size());
     }
 
 }
+
+
+
+
+
+
+
+
+

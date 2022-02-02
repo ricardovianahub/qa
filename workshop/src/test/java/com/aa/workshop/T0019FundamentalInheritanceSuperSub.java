@@ -57,45 +57,10 @@ public class T0019FundamentalInheritanceSuperSub {
 
     // Challenge:
     // Create a group of classes that will represent this:
-    // Animals can "speak"
+    // Animals cal "speak"
     // When a dog "speaks" it should say "woof"
     // When a cat "speaks" it should say "meow"
     // When a cow "speaks" it should say "moo"
     // Create a list of animals
     // Loop through them, and ask each of them to "speak"
-    // Dog IS A Animal
-
-    @Test
-    void challenge1() {
-        Animal animal = new Animal();
-        Animal sparky = new Dog();
-        Animal mrWhiskers = new Cat();
-        Animal bessie = new Cow();
-
-        List<Animal> someList = new ArrayList<>();
-
-        someList.add(animal);
-        someList.add(sparky);
-        someList.add(mrWhiskers);
-        someList.add(bessie);
-
-        for (Animal a : someList) {
-            a.moveForward();
-            a.eat();
-            System.out.println("I have " + a.numberOfLegs() + " legs");
-            System.out.println("When I speak I say " + a.speak());
-        }
-    }
-
-    /// Follow up Challenge
-    // My parent class is Vehicle
-    // My Child classes are Civic, Prius, Bug, Sedona
-    // Vehicles have 4 wheele, then can drive forward, stop, and they can
-    // display their own name. The parent class displays "Vehicle" as its
-    // name. Each specific car should display its own name
-
-    @Test
-    void challenge2() {
-
-    }
 }

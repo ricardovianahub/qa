@@ -18,16 +18,16 @@ public class T0002AdditionServiceRequimentChange {
     @Autowired
     private TestRestTemplate testRestTemplate;
 
-    // Please call the service http://ricbox.com/addition/4/10 and validate that the result is the sum
+    // Please call the service http://server1.onlinebunker.com/addition/4/10 and validate that the result is the sum
     // of number being passed
 
     @Test
     void test() {
-        String response = testRestTemplate.getForObject("http://ricbox.com/addition/4/10", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/addition/4/10", String.class);
         assertEquals("14", response);
     }
 
-    // Please call the service http://ricbox.com/addition/5/8 and validate that the result is the sum
+    // Please call the service http://server1.onlinebunker.com/addition/5/8 and validate that the result is the sum
     // of number being passed. Use these parameters:
     //
     // Expected result    x   y
@@ -40,10 +40,10 @@ public class T0002AdditionServiceRequimentChange {
 
     @Test
     void additionWithMultipleAsserts() {
-        assertEquals("2", testRestTemplate.getForObject("http://ricbox.com/addition/1/1", String.class));
-        assertEquals("5", testRestTemplate.getForObject("http://ricbox.com/addition/3/2", String.class));
-        assertEquals("1937", testRestTemplate.getForObject("http://ricbox.com/addition/1900/37", String.class));
-        assertEquals("100", testRestTemplate.getForObject("http://ricbox.com/addition/36/64", String.class));
+        assertEquals("2", testRestTemplate.getForObject("http://server1.onlinebunker.com/addition/1/1", String.class));
+        assertEquals("5", testRestTemplate.getForObject("http://server1.onlinebunker.com/addition/3/2", String.class));
+        assertEquals("1937", testRestTemplate.getForObject("http://server1.onlinebunker.com/addition/1900/37", String.class));
+        assertEquals("100", testRestTemplate.getForObject("http://server1.onlinebunker.com/addition/36/64", String.class));
     }
 
     @ParameterizedTest
@@ -51,7 +51,7 @@ public class T0002AdditionServiceRequimentChange {
     void additionWithParameters(String expected, String first, String second) {
         assertEquals(expected,
                 testRestTemplate.getForObject(
-                        "http://ricbox.com/addition/" + first + "/" + second,
+                        "http://server1.onlinebunker.com/addition/" + first + "/" + second,
                         String.class
                 )
         );

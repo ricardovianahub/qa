@@ -20,7 +20,7 @@ public class T0003DashService {
 
     @Test
     void test() {
-        String response = testRestTemplate.getForObject("http://ricbox.com/dash/a/b/c", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/dash/a/b/c", String.class);
         assertEquals("a-b-c", response);
     }
 
@@ -28,7 +28,7 @@ public class T0003DashService {
     @CsvSource({"a-b-c,a,b,c", "this-is-another,this,is,another", "123-456-789,123,456,789", "testing-123-abc,testing,123,abc"})
     void testDash(String expected, String one, String two, String three) {
         String response = testRestTemplate.getForObject(
-                "http://ricbox.com/dash/" +
+                "http://server1.onlinebunker.com/dash/" +
                         one +
                         "/" +
                         two +
@@ -49,7 +49,7 @@ public class T0003DashService {
     @ParameterizedTest
     @CsvSource({"hello-world-hello,hello,world,hello", "1-2-3,1,2,3", "-----,-,-,-", "I-did-it,I,did,it"})
     void response(String expected, String one, String two, String three) {
-        String response = testRestTemplate.getForObject("http://ricbox.com/dash/" + one + "/" + two + "/" + three, String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/dash/" + one + "/" + two + "/" + three, String.class);
         assertEquals(expected, response);
     }
 

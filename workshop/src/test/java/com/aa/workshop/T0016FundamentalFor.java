@@ -44,5 +44,12 @@ public class T0016FundamentalFor {
         for (int i = 10; i >= 1; i--) {
             System.out.println(i);
         }
+        for (int i = 20; i < 31; i++) {
+            System.out.println(i);
+        }
+        for (int i = 100; i >=80; i-=7) {
+            System.out.println(i);
+        }
     }
 }
+

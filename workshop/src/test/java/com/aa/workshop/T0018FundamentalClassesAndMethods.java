@@ -33,7 +33,7 @@ public class T0018FundamentalClassesAndMethods {
     @CsvSource({"30,10", "45,15", "99,33"})
     void challenge(int expected, int startValue) {
         T0018Multiplication t0018Multiplication = new T0018Multiplication();
-        int actual = t0018Multiplication.challenge(startValue);
+        int actual = t0018Multiplication.tripleValue(startValue);
 
         assertEquals(expected, actual);
     }

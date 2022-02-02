@@ -37,7 +37,7 @@ public class T0014RequirementsVsCode {
 
     @Test
     void test001_A() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> salad = objectMapper.readValue(response, List.class);
         for (Map lettuce : salad) {
             assertTrue(lettuce.get("firstName").toString().startsWith("J"));
@@ -46,7 +46,7 @@ public class T0014RequirementsVsCode {
 
     @Test
     void test001_B() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> passengers = objectMapper.readValue(response, List.class);
         for (Map passenger : passengers) {
             String.valueOf(passenger.get("lastName")).startsWith("J");
@@ -55,7 +55,7 @@ public class T0014RequirementsVsCode {
 
     @Test
     void test001_C() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> paris = objectMapper.readValue(response, List.class);
         for (Map museum : paris) {
             assertEquals(true, ((String) museum.get("firstName")).startsWith("J"));
@@ -111,7 +111,7 @@ public class T0014RequirementsVsCode {
 
     @Test
     void test004_A() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> family = objectMapper.readValue(response, List.class);
         for (Map person : family) {
             assertTrue("Doe".equals(person.get("lastName")));
@@ -120,7 +120,7 @@ public class T0014RequirementsVsCode {
 
     @Test
     void test004_B() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> family = objectMapper.readValue(response, List.class);
         String lastName = null;
         for (Map person : family) {
@@ -134,7 +134,7 @@ public class T0014RequirementsVsCode {
 
     @Test
     void test004_C() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> family = objectMapper.readValue(response, List.class);
         String lastName = null;
         for (Map person : family) {

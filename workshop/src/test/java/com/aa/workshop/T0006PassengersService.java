@@ -1,6 +1,7 @@
 package com.aa.workshop;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import java.util.Map;
@@ -28,7 +29,7 @@ public class T0006PassengersService {
 
     @Test
     void test() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> lines = objectMapper.readValue(response, List.class);
         assertEquals(15, lines.size());
     }
@@ -37,7 +38,7 @@ public class T0006PassengersService {
 
     @Test
     void oddRowsOfPassengersConcatenateOriginationAirport() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> passengers = objectMapper.readValue(response, List.class);
         int[] validNumbers = new int[]{1, 3, 5, 7, 9};
         String result = "";
@@ -55,21 +56,22 @@ public class T0006PassengersService {
 
     @Test
     void exampleOfArray() {
-        int[] even = new int[] {0,2,4,6,8};
-                             // 0 1 2 3 4
+        int[] even = new int[]{0, 2, 4, 6, 8};
+        // 0 1 2 3 4
         for (int i = 0; i < even.length; i++) {
             System.out.print("in the array even, the index ");
             System.out.print(i);
             System.out.print(" contains ");
-            System.out.print( even[i] );
+            System.out.print(even[i]);
 
             System.out.println();
         }
     }
 
+
     @Test
     void exampleOfRemainder() {
-        for (int i = 1; i <= 15; i+=2) {
+        for (int i = 1; i <= 15; i += 2) {
             System.out.println(i % 10); // % means ' remainder of '
         }
     }
@@ -80,7 +82,7 @@ public class T0006PassengersService {
 
 //    @Test
 //    void testWithPassengerObject() throws JsonProcessingException {
-//        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+//        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
 //        List<Passenger> lines = objectMapper.readValue(response, List.class);
 //        System.out.println("Passenger Object example: " + lines.get(0).getFirstName());
 //        assertEquals(15, lines.size());
@@ -88,7 +90,7 @@ public class T0006PassengersService {
 
     @Test
     void test2() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> lines = objectMapper.readValue(response, List.class);
         assertEquals(15, lines.size());
     }
@@ -131,5 +133,6 @@ public class T0006PassengersService {
             this.residence = residence;
         }
     }
-
 }
+
+

@@ -32,7 +32,7 @@ public class T0010UniqueOriginationAirports {
 
     @Test
     void filterList1() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> lines = objectMapper.readValue(response, List.class);
         List<Map> output = new ArrayList<>();
         for (Map map : lines) {
@@ -98,7 +98,7 @@ public class T0010UniqueOriginationAirports {
 
     @Test
     void uniqueOriginationAirports() throws JsonProcessingException {
-        String response = testRestTemplate.getForObject("http://ricbox.com/passengers", String.class);
+        String response = testRestTemplate.getForObject("http://server1.onlinebunker.com/passengers", String.class);
         List<Map> lines = objectMapper.readValue(response, List.class);
         List<String> uniqueOriginationAirports = new ArrayList<>();
         for (Map map : lines) {

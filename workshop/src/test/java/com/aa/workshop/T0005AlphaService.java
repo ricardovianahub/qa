@@ -35,11 +35,11 @@ public class T0005AlphaService {
 
     @Test
     void alpha() throws URISyntaxException {
-        String response1 = testRestTemplate.getForObject(new URI("http://ricbox.com/alpha/abc%3F"), String.class);
+        String response1 = testRestTemplate.getForObject(new URI("http://server1.onlinebunker.com/alpha/abc%3F"), String.class);
         assertEquals("false", response1);
-        String response2 = testRestTemplate.getForObject("http://ricbox.com/alpha/123", String.class);
+        String response2 = testRestTemplate.getForObject("http://server1.onlinebunker.com/alpha/123", String.class);
         assertEquals("false", response2);
-        String response3 = testRestTemplate.getForObject(new URI("http://ricbox.com/alpha/abc%20"), String.class);
+        String response3 = testRestTemplate.getForObject(new URI("http://server1.onlinebunker.com/alpha/abc%20"), String.class);
         assertEquals("false", response3);
     }
 
