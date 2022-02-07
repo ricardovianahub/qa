@@ -3,7 +3,7 @@
 Mon/Fri - Find specific questions
 
 1 - Anagram exercise
-2 - Snappy?
+2 - Snappy - encryption Javascript
 3 - Mockito
   3.1 - Principles of mocking/faking
     3.1.1 - For unit tests, everything else needs to be assumed to be working, except for the class you are testing
@@ -16,3 +16,6 @@ Mon/Fri - Find specific questions
   5.4 - Examples (Spring)
   5.2 - Some basic functionalities of module communication
   5.3 - Why we use controllers and their specific purpose
+6 - Dates
+  6.1 - When you write dates to a database or export/import them with another service, they should ALWAYS be UTC or confusion will ensue
+  6.2 - UTC (Universal Time Coordinated) and GMT have no Daylight Savings Time (absolute time) - they represent the same time, but we use UTC
