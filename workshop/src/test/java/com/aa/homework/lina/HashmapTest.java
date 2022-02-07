@@ -71,11 +71,17 @@ public class HashmapTest {
         // Maps have unique keys
         // Different value requires different key
         // One key can only correspond to one value
-        printEmployeeName(employeeMap.get(403999));
+        Employee employee = employeeMap.get(403999);
+        printEmployeeName(employee); // get in a map = I'll give you a key, and I want the object that key corresponds to ("value")
+
+        // OR (equivalent)
+
+        // "inlining":
+        printEmployeeName(employeeMap.get(403999)); // get in a map = I'll give you a key, and I want the object that key corresponds to ("value")
     }
 
     private void printEmployeeName(Employee employee) {
-        System.out.println("Employee's name is " + employee.getFirstName() + " " + employee.getLastName() );
+        System.out.println("Employee's name is " + employee.getFirstName() + " " + employee.getLastName());
     }
 
 }
