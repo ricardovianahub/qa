@@ -24,3 +24,16 @@
   5.2 - Find out if the service you're going to use is read-only (idempotent)
   5.3 - Become familiar with it in Postman
   5.4 - Try to implement
+6 - Create a test from a new microservice
+  6.1 Weather.gov API
+    6.1.1 Run in Postman - check the return:
+    if it was a list:
+    [
+      {
+        "status": "OK"
+      }
+    ]
+    reality:
+      {
+        "status": "OK"
+      }
