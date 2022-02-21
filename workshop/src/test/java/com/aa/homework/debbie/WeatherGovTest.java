@@ -1,6 +1,7 @@
 package com.aa.homework.debbie;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
@@ -40,6 +41,25 @@ public class WeatherGovTest {
         Map map = objectMapper.readValue(response, Map.class);
 
         assertTrue(map.get("title").toString().endsWith("Texas"));
+    }
+
+    @Test
+    void weatherAlertsVTEC() throws JsonProcessingException {
+        String response = testRestTemplate.getForObject("https://api.weather.gov/alerts/active?area=TX", String.class);
+        Map map = objectMapper.readValue(response, Map.class);
+
+        // features (list)
+        // properties
+        // parameters
+        // VTEC
+
+        List features = (List) map.get("features");
+        Map feature = (Map) features.get(0);
+        Map properties = (Map) feature.get("properties");
+        Map parameters = (Map) properties.get("parameters");
+        List vtec = (List) parameters.get("VTEC");
+        assertNotNull(parameters.get("VTEC"));
+        assertEquals("/O.CON.KEPZ.WI.Y.0005.220221T1900Z-220222T0100Z/", vtec.get(0));
     }
 
     @Test
