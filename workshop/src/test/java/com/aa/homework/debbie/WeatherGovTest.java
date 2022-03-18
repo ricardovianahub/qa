@@ -74,7 +74,8 @@ public class WeatherGovTest {
     void featuresLength() throws JsonProcessingException {
         String response = testRestTemplate.getForObject("https://api.weather.gov/alerts/active?area=TX", String.class);
         Map map = objectMapper.readValue(response, Map.class);
-        List texasFeatures = (List) map.get("features");
+        List texasFeatures = (List) map.get("features"); // [ ] - square brackets means list in JSON
+                // Anytime you have a generic Object and you want to use it with the specific methods and properties of whatever the class it is, it needs to be CAST
 
         assertTrue(texasFeatures.size() >= 1);
     }

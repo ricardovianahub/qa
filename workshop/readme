@@ -27,7 +27,7 @@
 6 - Create a test from a new microservice
   6.1 Weather.gov API
     6.1.1 Run in Postman - check the return:
-    if it was a list:
+    if it was a list: (starts with a square bracket in JSON)
     [
       {
         "status": "OK"
@@ -37,3 +37,9 @@
       {
         "status": "OK"
       }
+7 - Data structures
+  7.1 Stack (Last in, First out) - LIFO - you add or retrieve objects and when you retrieve, the object is removed from the stack
+  7.2 Queue (First in, First out) - FIFO
+  7.3 Binary Tree
+  7.4 Arrays
+  7.5 Linked List
