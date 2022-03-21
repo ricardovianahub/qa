@@ -35,4 +35,17 @@ public class StackTest {
         assertEquals("four", result);
     }
 
+    @Test // Change parameters on each test
+    void add3Pop3ExpectingPhysicalDeletionInTheStackObject() {
+        Stack stack = new Stack();
+        stack.push("one");
+        stack.push("two");
+        stack.push("four");
+        stack.pop();                  // "four"
+        stack.push("nine");
+        String result = stack.pop();  // "nine"
+        assertEquals(2, stack.size());
+        assertEquals("nine", result);
+    }
+
 }

@@ -3,7 +3,7 @@ package com.aa.sri.datastructure;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Stack {
+public class Stack { // Last in, First out
     List<String> values = new ArrayList<>();
 
     public void push(String text) {
