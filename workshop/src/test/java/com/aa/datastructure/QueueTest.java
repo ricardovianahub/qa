@@ -25,13 +25,13 @@ public class QueueTest {
 //    @Test
     void queueAddAndRetrieveFour() {
         Queue queue = new Queue();
-        queue.push("filler");
-        queue.push("filler");
+        queue.push("six");
+        queue.push("seven");
         queue.push("four");
         queue.push("five");
         queue.pop();
         String popped = queue.pop();
-        assertEquals("four", popped);
+        assertEquals("seven", popped);
         assertEquals(2, queue.size());
     }
 
