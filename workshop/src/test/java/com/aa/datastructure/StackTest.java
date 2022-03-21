@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-public class StackTest {
+public class StackTest { // Last in, First out
 
     @Test
     void stackAddOne() {
