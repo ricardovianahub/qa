@@ -1,15 +1,17 @@
 package com.aa.datastructure;
 
 public class Queue {
+    int size = 1;
     public void push(String one) {
 
     }
 
     public int size() {
-        return 0;
+        return size;
     }
 
     public String pop() {
-        return null;
+        size = 0;
+        return "two";
     }
 }

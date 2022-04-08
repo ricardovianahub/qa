@@ -13,7 +13,7 @@ public class QueueTest {
         assertEquals(1, queue.size());
     }
 
-//    @Test
+    @Test
     void queueAddAndRetrieveOne() {
         Queue queue = new Queue();
         queue.push("two");
